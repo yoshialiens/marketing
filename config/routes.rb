@@ -1,57 +1,33 @@
 SamuraiApp::Application.routes.draw do
 
-  get "chapter3_section5/manual1"
-  get "chapter3_section5/manual2"
-  get "chapter3_section5/manual3"
-  get "chapter3_section5/manual4"
-  get "chapter3_section4/manual1"
-  get "chapter3_section4/manual2"
-  get "chapter3_section4/manual3"
-  get "chapter3_section3/manual1"
-  get "chapter3_section3/manual2"
-  get "chapter3_section3/manual3"
-  get "chapter3_section2/manual1"
-  get "chapter3_section2/manual2"
-  get "chapter3_section2/manual3"
-  get "chapter3_section2/manual4"
-  get "chapter3_section1/manual1"
-  get "chapter3_section1/manual2"
-  get "chapter5_section1/manual1"
-  get "chapter5_section1/manual2"
-  get "chapter4_section6/manual1"
-  get "chapter4_section6/manual2"
-  get "chapter4_section5/manual1"
-  get "chapter4_section5/manual2"
-  get "chapter4_section5/manual3"
-  get "chapter4_section5/manual4"
+#chapter1
 
-  get "chapter4_section4/manual1"
-  get "chapter4_section4/manual2"
-  get "chapter4_section4/manual3"
+  get "chapter1_section1/manual1"
+  get "chapter1_section1/manual2"
+  get "chapter1_section1/manual3"
+  get "chapter1_section1/manual4"
+  get "chapter1_section1/manual5"
+  get "chapter1_section1/manual6"
+  get "chapter1_section1/manual7"
 
-  get "chapter4_section3/manual1"
-  get "chapter4_section3/manual2"
-  get "chapter4_section3/manual3"
-  get "chapter4_section3/manual4"
-  get "chapter4_section3/manual5"
+  get "chapter1_section2/manual1"
+  get "chapter1_section2/manual2"
+  get "chapter1_section2/manual3"
+  get "chapter1_section2/manual4"
 
-  get "chapter4_section2/manual1"
-  get "chapter4_section2/manual2"
-  get "chapter4_section2/manual3"
-  get "chapter4_section2/manual4"
-
-  get "chapter4_section1/manual1"
-  get "chapter4_section1/manual2"
-  get "chapter4_section1/manual3"
-  get "chapter4_section1/manual4"
-  get "chapter4_section1/manual5"
-
-  get "chapter2_section3/manual1"
-  get "chapter2_section3/manual2"
-  get "chapter2_section3/manual3"
-
-  get "chapter2_section2/manual1"
-  get "chapter2_section2/manual2"
+  get "chapter1_section3/manual1"
+  get "chapter1_section3/manual2"
+  get "chapter1_section3/manual3"
+  get "chapter1_section3/manual4"
+  get "chapter1_section3/manual5"
+  get "chapter1_section3/manual6"
+  get "chapter1_section3/manual7"
+  get "chapter1_section3/manual8"
+  get "chapter1_section3/manual9"
+  get "chapter1_section3/manual10"
+  get "chapter1_section3/manual11"
+  get "chapter1_section3/manual12"
+  get "chapter1_section3/manual13"
 
   get "chapter1_section4/manual1"
   get "chapter1_section4/manual2"
@@ -61,35 +37,6 @@ SamuraiApp::Application.routes.draw do
   get "chapter1_section4/manual6"
   get "chapter1_section4/manual7"
 
-  get "chapter2_section1/manual1"
-  get "chapter2_section1/manual2"
-  get "chapter2_section1/manual3"
-  get "chapter2_section1/manual4"
-
-  get "chapter1_section7/manual1"
-  get "chapter1_section7/manual2"
-  get "chapter1_section7/manual3"
-  get "chapter1_section7/manual4"
-  get "chapter1_section7/manual5"
-  get "chapter1_section7/manual6"
-
-  get "chapter1_section6/manual1"
-  get "chapter1_section6/manual2"
-  get "chapter1_section6/manual3"
-  get "chapter1_section6/manual4"
-  get "chapter1_section6/manual5"
-  get "chapter1_section6/manual6"
-
-  get "chapter1_section3/manual1"
-  get "chapter1_section3/manual2"
-  get "chapter1_section3/manual3"
-  get "chapter1_section3/manual4"
-
-  get "chapter1_section2/manual1"
-  get "chapter1_section2/manual2"
-  get "chapter1_section2/manual3"
-  get "chapter1_section2/manual4"
-
   get 'chapter1_section5/manual1'
   get 'chapter1_section5/manual2'
   get 'chapter1_section5/manual3'
@@ -98,13 +45,98 @@ SamuraiApp::Application.routes.draw do
   get 'chapter1_section5/manual6'
   get 'chapter1_section5/manual7'
 
-  get "chapter1_section1/manual1"
-  get "chapter1_section1/manual2"
-  get "chapter1_section1/manual3"
-  get "chapter1_section1/manual4"
-  get "chapter1_section1/manual5"
-  get "chapter1_section1/manual6"
-  get "chapter1_section1/manual7"
+  get "chapter1_section6/manual1"
+  get "chapter1_section6/manual2"
+  get "chapter1_section6/manual3"
+  get "chapter1_section6/manual4"
+  get "chapter1_section6/manual5"
+  get "chapter1_section6/manual6"
+
+  get "chapter1_section7/manual1"
+  get "chapter1_section7/manual2"
+  get "chapter1_section7/manual3"
+  get "chapter1_section7/manual4"
+  get "chapter1_section7/manual5"
+  get "chapter1_section7/manual6"
+
+
+#chapter2
+
+  get "chapter2_section1/manual1"
+  get "chapter2_section1/manual2"
+  get "chapter2_section1/manual3"
+  get "chapter2_section1/manual4"
+
+  get "chapter2_section2/manual1"
+  get "chapter2_section2/manual2"
+
+  get "chapter2_section3/manual1"
+  get "chapter2_section3/manual2"
+  get "chapter2_section3/manual3"
+
+
+#chapter3
+
+  get "chapter3_section1/manual1"
+  get "chapter3_section1/manual2"
+
+  get "chapter3_section2/manual1"
+  get "chapter3_section2/manual2"
+  get "chapter3_section2/manual3"
+  get "chapter3_section2/manual4"
+
+  get "chapter3_section3/manual1"
+  get "chapter3_section3/manual2"
+  get "chapter3_section3/manual3"
+
+  get "chapter3_section4/manual1"
+  get "chapter3_section4/manual2"
+  get "chapter3_section4/manual3"
+
+  get "chapter3_section5/manual1"
+  get "chapter3_section5/manual2"
+  get "chapter3_section5/manual3"
+  get "chapter3_section5/manual4"
+
+
+#chapter4
+
+  get "chapter4_section1/manual1"
+  get "chapter4_section1/manual2"
+  get "chapter4_section1/manual3"
+  get "chapter4_section1/manual4"
+  get "chapter4_section1/manual5"
+
+  get "chapter4_section2/manual1"
+  get "chapter4_section2/manual2"
+  get "chapter4_section2/manual3"
+  get "chapter4_section2/manual4"
+
+  get "chapter4_section3/manual1"
+  get "chapter4_section3/manual2"
+  get "chapter4_section3/manual3"
+  get "chapter4_section3/manual4"
+  get "chapter4_section3/manual5"
+
+  get "chapter4_section4/manual1"
+  get "chapter4_section4/manual2"
+  get "chapter4_section4/manual3"
+
+  get "chapter4_section5/manual1"
+  get "chapter4_section5/manual2"
+  get "chapter4_section5/manual3"
+  get "chapter4_section5/manual4"
+
+  get "chapter4_section6/manual1"
+  get "chapter4_section6/manual2"
+
+
+#chapter5
+
+  get "chapter5_section1/manual1"
+  get "chapter5_section1/manual2"
+
+
 
   root  'static_pages#home'
   match '/help',          to: 'static_pages#help',          via: 'get'
