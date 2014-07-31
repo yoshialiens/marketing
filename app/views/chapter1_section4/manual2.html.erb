@@ -1,0 +1,56 @@
+  <div class="span4">
+    <%= render 'layouts/navbar' %>
+  </div>
+  <div class="span8">
+  	  <h1 id="pcの環境構築準備"><a name="pcの環境構築準備" href="#pcの環境構築準備"></a>PCの環境構築準備</h1>
+  	  <hr class="page">
+  	  <h3 id="必要なツールをインストール"><a name="必要なツールをインストール" href="#必要なツールをインストール"></a>必要なツールをインストール</h3>
+  	  <p>これからプログラミング学習を進める上で必要なツールのインストールを行います。<br>
+  	     侍エンジニア塾では、「Ruby」という言語と「Ruby on Rails」というWebフレームワークを使い、Webアプリケーションを作成します。<br>
+  	     これらを使えるよう、PCの環境を構築していきましょう。</p>
+  	     <hr class="section">
+  	     <h3 id="テキストエディタ"><a name="テキストエディタ" href="#テキストエディタ"></a>テキストエディタ</h3>
+  	     <p>プログラミング言語（コード）を書いていく上で、使いやすく無料なテキストエディタを紹介します。</p>
+  	     <h4 id="[sublime-text](http://www.sublimetext.com/)"><a name="[sublime-text](http://www.sublimetext.com/)" href="#[sublime-text](http://www.sublimetext.com/)"></a><a href="http://www.sublimetext.com/" target="_blank">Sublime Text</a></h4>
+  	     <p><%= image_tag"1_4_001.png", :alt => "Sublime text" %></p>
+  	     <p>「Sublime Text」は言語によって見やすいように色分けを行ってくれたり、スペニット機能や予測変換をしてくれる高性能かつ無料のテキストエディタです。<br>
+  	        侍エンジニア塾では、この『Sublime Text』を使用することを推奨しています。</p>
+  	     <p>上記タイトルリンクからサイトに飛び、Sublime textアプリをお使いのPCにダウンロードしておいてください。</p>
+	        <hr class="section">
+	        <h3 id="ターミナル"><a name="ターミナル" href="#ターミナル"></a>ターミナル</h3>
+	        <p><%= image_tag"1_4_002.png", :alt => "terminal" %></p>
+	        <p>PC上（ローカル環境）にて「Ruby」や「Ruby on Rails」を動かすためには、コマンドライン入力という操作を行います。<br>
+	           この操作を行うために、Macに標準装備されている『ターミナル』を使用します。</p>
+	           <p>『ターミナル』アプリのある場所は、<strong>「Macintosh HD &gt; アプリケーション &gt; ユーティリティ」</strong>です。</p>
+	           <p>お使いのPCがMacであれば、F4キーを押すと表示されるアプリの中からユーティリティもしくはその他と名前のついたフォルダを開くとその中にあります。</p>
+	           <p><%= image_tag"1_4_004.png", :alt => "app" %></p>
+	           <hr class="section">
+	           <h3 id="xcode"><a name="xcode" href="#xcode"></a>Xcode</h3>
+	           <p><%= image_tag"1_4_003.png", :alt => "Xcode" %></p><p>『Xcode』は、MacでWebサービス・iOSアプリ開発を行う際に使用するソフトになります。<br>
+	              ですが、今回はPCの環境構築の際に『Command Line Developer Tools』というキッドをインストールする必要があり、そのインストールのためのみ、『Xcode』をインストールします。</p>
+	           <p>『Xcode』は「App Store」にてダウンロードが可能です。<a href="https://itunes.apple.com/jp/app/xcode/id497799835?mt=12" target="_blank">ダウンロードサイト</a></p>
+	           <hr class="underscore">
+	           <hr class="section">
+	           <h3 id="command-line-developer-tools&lt;br&gt;をインストールする"><a name="command-line-developer-tools&lt;br&gt;をインストールする" href="#command-line-developer-tools&lt;br&gt;をインストールする"></a>Command Line Developer Tools<br>をインストールする</h3>
+	           <h3 id="1.「ターミナル」を起動する"><a name="1.「ターミナル」を起動する" href="#1.「ターミナル」を起動する"></a>1.「ターミナル」を起動する</h3>
+	           <p><%= image_tag"1_4_002.png", :alt => "terminal" %></p>
+	           <p>上記「ターミナル」で解説した方法でターミナルアプリを立ち上げます(初期設定では白い背景に黒い文字)</p>
+	           <p><%= image_tag"1_4_006.png", :alt => "app" %></p>
+	           <hr class="section">
+	           <h3 id="2.homebrewをインストールするため、command-line-developer-toolsをインストールする"><a name="2.homebrewをインストールするため、command-line-developer-toolsをインストールする" href="#2.homebrewをインストールするため、command-line-developer-toolsをインストールする"></a>2.Homebrewをインストールするため、Command Line Developer Toolsをインストールする</h3>
+	           <hr class="section">
+	           <h4 id="2-1.appleが開発している「xcode」をインストール"><a name="2-1.appleが開発している「xcode」をインストール" href="#2-1.appleが開発している「xcode」をインストール"></a>2-1.Appleが開発している「Xcode」をインストール</h4>
+	           <p>※インストール済みの人は飛ばしてください。<br>
+	              「App Store」にて「Xcode」を検索してダウンロードしてみましょう。</p>
+	           <hr class="section">
+	           <h4 id="2-2.command-line-toolsをインストール"><a name="2-2.command-line-toolsをインストール" href="#2-2.command-line-toolsをインストール"></a>2-2.Command Line Toolsをインストール</h4>
+	           <p>MacOSが<strong>「OSX Mountain Lion以前」</strong>の方は以下の通り</p>
+	           <pre><code data-origin="&lt;pre&gt;&lt;code&gt;「Xcode」を起動→左上のメニューバーから「preferences」を選択→
+「Downloads」を選択し、「Command Line Tools for Xcode」を選択してインストール。
+&lt;/code&gt;&lt;/pre&gt;">「Xcode」を起動→左上のメニューバーから「preferences」を選択→
+「Downloads」を選択し、「Command Line Tools for Xcode」を選択してインストール。
+</code></pre><p>※MacOSが<strong>「OSX Mavericks」</strong>の方は以下のコマンドでインストールされます。</p><pre><code data-origin="&lt;pre&gt;&lt;code&gt;$ xcode-select --install
+&lt;/code&gt;&lt;/pre&gt;">$ xcode-select --install
+</code></pre>
+			<p>上記コマンドでもインストールができない場合は、<a href="http://joppot.info/2014/02/12/681" target="_blank">Xcode5にCommand Line Tools（コマンドラインツール）をインストールする</a>を参考に「Xcodeを起動してCommand Line Toolsを確かめる」の手前まで進めてください。</p>
+  </div>

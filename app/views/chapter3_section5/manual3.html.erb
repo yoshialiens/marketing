@@ -1,0 +1,82 @@
+  <div class="span4">
+    <%= render 'layouts/navbar3' %>
+  </div>
+  <div class="span8">
+  	<h1 id="新しいカラムを追加する"><a name="新しいカラムを追加する" href="#新しいカラムを追加する"></a>新しいカラムを追加する</h1><hr class="page"><p>今回はMessageにふりがな用のカラムを追加します。</p><hr class="section"><h3 id="1.messageテーブルにふりがなのカラムを追加する"><a name="1.messageテーブルにふりがなのカラムを追加する" href="#1.messageテーブルにふりがなのカラムを追加する"></a>1.Messageテーブルにふりがなのカラムを追加する</h3><pre><code class="ruby hljs" data-origin="&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;$ rails g migration AddColumnToMessage furigana:string
+&lt;/code&gt;&lt;/pre&gt;"><span class="hljs-variable">$ </span>rails g migration <span class="hljs-constant">AddColumnToMessage</span> <span class="hljs-symbol">furigana:</span>string
+</code></pre><h3 id="2.マイグレーションを実行"><a name="2.マイグレーションを実行" href="#2.マイグレーションを実行"></a>2.マイグレーションを実行</h3><pre><code class="ruby hljs" data-origin="&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;$ rake db:migrate
+&lt;/code&gt;&lt;/pre&gt;"><span class="hljs-variable">$ </span>rake <span class="hljs-symbol">db:</span>migrate
+</code></pre><h3 id="3.モデルにふりがなのカラムを設定します。"><a name="3.モデルにふりがなのカラムを設定します。" href="#3.モデルにふりがなのカラムを設定します。"></a>3.モデルにふりがなのカラムを設定します。</h3><p>【app/models/message.rb】を編集しましょう。</p><pre><code class="ruby hljs" data-origin="&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;class Message &amp;lt; ActiveRecord::Base
+  attr_accessible :name, :furigana, :email, :content
+end
+&lt;/code&gt;&lt;/pre&gt;"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Message</span> <span class="hljs-inheritance">&lt; <span class="hljs-parent">ActiveRecord::Base</span></span></span>
+  attr_accessible <span class="hljs-symbol">:name</span>, <span class="hljs-symbol">:furigana</span>, <span class="hljs-symbol">:email</span>, <span class="hljs-symbol">:content</span>
+<span class="hljs-keyword">end</span>
+</code></pre><h3 id="4.viewを設定します。"><a name="4.viewを設定します。" href="#4.viewを設定します。"></a>4.Viewを設定します。</h3><p>【app/views/message/new.html.erb】 にふりがな用のラベルを追加しましょう。</p><pre><code class="ruby hljs" data-origin="&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;&amp;lt;h1&amp;gt;Contact&amp;lt;/h1&amp;gt;
+
+&amp;lt;%= form_for @message, :url =&amp;gt; message_path do |form| %&amp;gt;
+
+&amp;lt;table border=&quot;0&quot; cellpadding=&quot;0&quot; cellspacing=&quot;0&quot; class=&quot;post&quot;&amp;gt;
+
+&amp;lt;tr&amp;gt;
+  &amp;lt;th&amp;gt;&amp;lt;%= form.label :name %&amp;gt;&amp;lt;/th&amp;gt;
+  &amp;lt;td&amp;gt;&amp;lt;%= form.text_field :name %&amp;gt;&amp;lt;/td&amp;gt;
+&amp;lt;/tr&amp;gt;
+
+&amp;lt;tr&amp;gt;
+  &amp;lt;th&amp;gt;&amp;lt;%= form.label :furigana %&amp;gt;&amp;lt;/th&amp;gt;
+  &amp;lt;td&amp;gt;&amp;lt;%= form.text_field :furigana %&amp;gt;&amp;lt;/td&amp;gt;
+&amp;lt;/tr&amp;gt;
+
+&amp;lt;tr&amp;gt;
+  &amp;lt;th&amp;gt;&amp;lt;%= form.label :email %&amp;gt;&amp;lt;/th&amp;gt;
+  &amp;lt;td&amp;gt;&amp;lt;%= form.text_field :email %&amp;gt;&amp;lt;/td&amp;gt;
+&amp;lt;/tr&amp;gt;
+
+&amp;lt;tr&amp;gt;
+  &amp;lt;th&amp;gt;&amp;lt;%= form.label :content %&amp;gt;&amp;lt;/th&amp;gt;
+  &amp;lt;td&amp;gt;&amp;lt;%= form.text_area :content %&amp;gt;&amp;lt;/td&amp;gt;
+&amp;lt;/tr&amp;gt;
+
+&amp;lt;/table&amp;gt;
+
+&amp;lt;div class=&quot;actions&quot;&amp;gt;
+    &amp;lt;%= form.submit &quot;メール送信&quot; %&amp;gt;
+&amp;lt;/div&amp;gt;
+
+&amp;lt;% end %&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;">&lt;h1&gt;Contact&lt;/h1&gt;
+
+&lt;%= form_for @message, :url =&gt; message_path do |form| %&gt;
+
+&lt;table border="0" cellpadding="0" cellspacing="0" class="post"&gt;
+
+&lt;tr&gt;
+  &lt;th&gt;&lt;%= form.label :name %&gt;&lt;/th&gt;
+  &lt;td&gt;&lt;%= form.text_field :name %&gt;&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+  &lt;th&gt;&lt;%= form.label :furigana %&gt;&lt;/th&gt;
+  &lt;td&gt;&lt;%= form.text_field :furigana %&gt;&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+  &lt;th&gt;&lt;%= form.label :email %&gt;&lt;/th&gt;
+  &lt;td&gt;&lt;%= form.text_field :email %&gt;&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+  &lt;th&gt;&lt;%= form.label :content %&gt;&lt;/th&gt;
+  &lt;td&gt;&lt;%= form.text_area :content %&gt;&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;/table&gt;
+
+&lt;div class="actions"&gt;
+    &lt;%= form.submit "メール送信" %&gt;
+&lt;/div&gt;
+
+&lt;% end %&gt;
+</code></pre><h3 id="5.動作確認をしてみましょう"><a name="5.動作確認をしてみましょう" href="#5.動作確認をしてみましょう"></a>5.動作確認をしてみましょう</h3><p><a href="http://localhost:3000/message">http://localhost:3000/message</a></p><p>設定したアドレスにフリガナを含むメールが来ていれば設置完了です。</p>
+  </div>

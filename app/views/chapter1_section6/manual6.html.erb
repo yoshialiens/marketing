@@ -1,0 +1,22 @@
+  <div class="span4">
+    <%= render 'layouts/navbar' %>
+  </div>
+  <div class="span8">
+  	<h1 id="heroku用sshキーの作成"><a name="heroku用sshキーの作成" href="#heroku用sshキーの作成"></a>heroku用sshキーの作成</h1><hr class="page"><p>githubでも利用しましたが、外部のWebサービスとの接続の際に『sshキー』というカギを使い、暗号化をして接続します。</p><p>githubにてパブリックキーを作成している方は、ログイン後に以下のような表示がされます。</p><pre><code class="ruby hljs" data-origin="&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;Found existing public key: /Users/(PCユーザー名)/.ssh/id_rsa.pub
+Uploading SSH public key /Users/(PCユーザー名)/.ssh/id_rsa.pub... done
+Authentication successful.
+&lt;/code&gt;&lt;/pre&gt;"><span class="hljs-constant">Found</span> existing public <span class="hljs-symbol">key:</span> /<span class="hljs-constant">Users</span>/(<span class="hljs-constant">PC</span>ユーザー名)/.ssh/id_rsa.pub
+<span class="hljs-constant">Uploading</span> <span class="hljs-constant">SSH</span> public key /<span class="hljs-constant">Users</span>/(<span class="hljs-constant">PC</span>ユーザー名)/.ssh/id_rsa.pub... done
+<span class="hljs-constant">Authentication</span> successful.
+</code></pre><hr class="section"><p>sshキーが存在しない場合は、以下の流れでsshキーを作成＆登録します。</p><pre><code class="ruby hljs" data-origin="&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;Could not find an existing public key.
+Would you like to generate one? [Yn]
+&lt;/code&gt;&lt;/pre&gt;"><span class="hljs-constant">Could</span> <span class="hljs-keyword">not</span> find an existing public key.
+<span class="hljs-constant">Would</span> you like to generate one? [<span class="hljs-constant">Yn</span>]
+</code></pre><p>→Yesの「Y」を入力してEnterを押します。</p><pre><code class="ruby hljs" data-origin="&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;Generating new SSH public key.
+Uploading SSH public key /Users/(PCユーザー名)/.ssh/id_rsa.pub
+Authentication successful.
+&lt;/code&gt;&lt;/pre&gt;"><span class="hljs-constant">Generating</span> new <span class="hljs-constant">SSH</span> public key.
+<span class="hljs-constant">Uploading</span> <span class="hljs-constant">SSH</span> public key /<span class="hljs-constant">Users</span>/(<span class="hljs-constant">PC</span>ユーザー名)/.ssh/id_rsa.pub
+<span class="hljs-constant">Authentication</span> successful.
+</code></pre><hr class="section"><p><code>Authentication successful.</code>が表示されたら、herokuへのログインが完了です。</p>
+  </div>

@@ -1,0 +1,19 @@
+  <div class="span4">
+    <%= render 'layouts/navbar' %>
+  </div>
+  <div class="span8">
+  	<h1 id="gitインストール"><a name="gitインストール" href="#gitインストール"></a>gitインストール</h1><hr class="page"><p>【<strong>git</strong>】とはオープンソースの分散型バージョン管理システムです。<br>詳細についてはgithubの設定をする際に学びますが、<br>WEBサービスを開発する上で<strong>git</strong>はよく使用しますので、覚えておいてください。</p><p>今回はhomebrewからインストールと設定のみ行います。</p><h3 id="1.gitのインストール（のちに重要）"><a name="1.gitのインストール（のちに重要）" href="#1.gitのインストール（のちに重要）"></a>1.gitのインストール（のちに重要）</h3><pre><code class="ruby hljs" data-origin="&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;$ brew install git
+&lt;/code&gt;&lt;/pre&gt;"><span class="hljs-variable">$ </span>brew install git
+</code></pre><h3 id="2.pathを通す"><a name="2.pathを通す" href="#2.pathを通す"></a>2.PATHを通す</h3><pre><code class="ruby hljs" data-origin="&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;$ echo 'eval &quot;$(rbenv init -)&quot;' &amp;gt;&amp;gt; ~/.bash_profile
+&lt;/code&gt;&lt;/pre&gt;">$ echo 'eval "$(rbenv init -)"' &gt;&gt; ~/.bash_profile
+</code></pre>
+<p>
+Macの中には何重ものディレクトリ(フォルダ)が構造をなし、いろんな場所にダウンロードしたソフトがあります。<br>例えば普段よく目にするデスクトップも、Macの中では "/Users/ユーザ名/Desktop"という構造体ができています。<br>
+これをターミナル上で表すと各ディレクトリごとの間に"/"が付き、ひとつ下の階層のディレクトリに移動したことを表します。<br>
+ターミナルでpwdコマンドを叩くと、今いるディレクトリまでの構造を示してくれます。<br>
+<%= image_tag"1_4_009.png", :alt => "pwd" %>
+</p>
+<p>
+PATHを通すとは、このディレクトリ構造体のどこにいようと、指定したソフトのある位置を特定して起動するための道を示しておくことです。
+</p>
+  </div>

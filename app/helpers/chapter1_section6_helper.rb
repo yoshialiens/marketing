@@ -1,0 +1,2 @@
+module Chapter1Section6Helper
+end

@@ -1,0 +1,12 @@
+  <div class="span4">
+    <%= render 'layouts/navbar' %>
+  </div>
+  <div class="span8">
+  	<h1 id="gitで管理"><a name="gitで管理" href="#gitで管理"></a>gitで管理</h1><hr class="page"><h3 id="scaffoldで作ったrailsアプリのリポジトリへ移動"><a name="scaffoldで作ったrailsアプリのリポジトリへ移動" href="#scaffoldで作ったrailsアプリのリポジトリへ移動"></a>Scaffoldで作ったRailsアプリのリポジトリへ移動</h3><p>cdコマンドを使い、Railsプロジェクトのリポジトリまで移動します。</p><hr class="section"><h3 id="railsアプリのリポジトリにgit用のサブディレクトリを作成"><a name="railsアプリのリポジトリにgit用のサブディレクトリを作成" href="#railsアプリのリポジトリにgit用のサブディレクトリを作成"></a>RailsアプリのリポジトリにGit用のサブディレクトリを作成</h3><pre><code class="ruby hljs" data-origin="&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;$ git init
+&lt;/code&gt;&lt;/pre&gt;"><span class="hljs-variable">$ </span>git init
+</code></pre><hr class="section"><h3 id="github（git）にプッシュ（データを送信）するファイルを指定する"><a name="github（git）にプッシュ（データを送信）するファイルを指定する" href="#github（git）にプッシュ（データを送信）するファイルを指定する"></a>Github（Git）にプッシュ（データを送信）するファイルを指定する</h3><p>※addの後の「.」は全てのファイルを選択するという意味になります。</p><pre><code class="ruby hljs" data-origin="&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;$ git add .
+&lt;/code&gt;&lt;/pre&gt;"><span class="hljs-variable">$ </span>git add .
+</code></pre><hr class="section"><h3 id="git-addで指定したファイルをまとめ、名前を付けてコミット（セーブ）する"><a name="git-addで指定したファイルをまとめ、名前を付けてコミット（セーブ）する" href="#git-addで指定したファイルをまとめ、名前を付けてコミット（セーブ）する"></a>git addで指定したファイルをまとめ、名前を付けてコミット（セーブ）する</h3><pre><code class="ruby hljs" data-origin="&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;$ git commit -m &quot;first commit&quot;
+&lt;/code&gt;&lt;/pre&gt;"><span class="hljs-variable">$ </span>git commit -m <span class="hljs-string">"first commit"</span>
+</code></pre><p>（”first commit”この中は自分が分かりやすいようなタイトルをつけてください）</p><p><%= image_tag"1_7_001.png", :alt => "rails_test" %></p><hr class="section"><p><a href="http://railstutorial.jp/chapters/beginning?version=4.0#sec-github">railstutorial　GitHub</a></p><p><a href="http://railstutorial.jp/chapters/beginning?version=4.0#sec-git_commands">railstutorial　ブランチ (branch)、変更 (edit)、 コミット (commit)、マージ (merge)</a></p>
+  </div>

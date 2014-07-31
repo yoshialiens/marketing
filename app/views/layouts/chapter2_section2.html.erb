@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= full_title(yield(:title)) %></title>
+    <%= stylesheet_link_tag "application", media: "all",
+                                           "data-turbolinks-track" => true %>
+    <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+    <%= csrf_meta_tags %>
+    <%= render 'layouts/shim' %>
+  </head>
+  <body class="markdown github">
+  	<div id="all">
+    <%= render 'layouts/header' %>
+    <div class="container">
+      <div class="row">
+ 	    <div id="title">
+          <h1>第二章  ~ 基礎 ~</h1>
+		</div>
+		<%= yield %>
+	  </div>
+    </div>
+    <%= render 'layouts/footer' %>
+  	</div>
+  </body>
+</html>
+

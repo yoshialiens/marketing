@@ -1,0 +1,98 @@
+  <div class="span4">
+    <%= render 'layouts/navbar3' %>
+  </div>
+  <div class="span8">
+  	<h1 id="自動返信メール機能を実装する"><a name="自動返信メール機能を実装する" href="#自動返信メール機能を実装する"></a>自動返信メール機能を実装する</h1><hr class="page"><h3 id="1.メーラーの中身を編集します。"><a name="1.メーラーの中身を編集します。" href="#1.メーラーの中身を編集します。"></a>1.メーラーの中身を編集します。</h3><p>【/app/mailers/message_mailer.rb】へ追記</p><pre><code class="ruby hljs" data-origin="&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;  def resp(message)
+    @message = message
+    mail(:to =&amp;gt; @message.email, :subject =&amp;gt; 'お問い合わせありがとうございました。')
+  end
+&lt;/code&gt;&lt;/pre&gt;">  <span class="hljs-function"><span class="hljs-keyword">def</span> </span>resp(message)
+    <span class="hljs-variable">@message</span> = message
+    mail(<span class="hljs-symbol">:to</span> =&gt; <span class="hljs-variable">@message</span>.email, <span class="hljs-symbol">:subject</span> =&gt; <span class="hljs-string">'お問い合わせありがとうございました。'</span>)
+  <span class="hljs-keyword">end</span>
+</code></pre><h3 id="2.コントローラーの設定します。"><a name="2.コントローラーの設定します。" href="#2.コントローラーの設定します。"></a>2.コントローラーの設定します。</h3><p>【app/controllers/message_controller.rb】へ<br><strong>ContactMailer.resp(@message).deliver</strong>を追記</p><pre><code class="ruby hljs" data-origin="&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;# coding: utf-8
+
+class MessageController &amp;lt; ApplicationController
+
+  def new
+    @message = Message.new
+  end
+
+  def create
+    @message = Message.new(params[:message])
+    if @message.save
+      MessageMailer.sent(@message).deliver
+      MessageMailer.resp(@message).deliver
+      redirect_to :action =&amp;gt; :index, :notice =&amp;gt; 'お問い合わせありがとうございました。'
+    else
+      render :action =&amp;gt; :index, :alert =&amp;gt; 'お問い合わせに不備があります。'
+    end
+  end
+
+  def index
+    @notice = params[:notice]
+  end
+
+end
+&lt;/code&gt;&lt;/pre&gt;"><span class="hljs-comment"># coding: utf-8</span>
+
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MessageController</span> <span class="hljs-inheritance">&lt; <span class="hljs-parent">ApplicationController</span></span></span>
+
+  <span class="hljs-function"><span class="hljs-keyword">def</span> </span>new
+    <span class="hljs-variable">@message</span> = <span class="hljs-constant">Message</span>.new
+  <span class="hljs-keyword">end</span>
+
+  <span class="hljs-function"><span class="hljs-keyword">def</span> </span>create
+    <span class="hljs-variable">@message</span> = <span class="hljs-constant">Message</span>.new(params[<span class="hljs-symbol">:message</span>])
+    <span class="hljs-keyword">if</span> <span class="hljs-variable">@message</span>.save
+      <span class="hljs-constant">MessageMailer</span>.sent(<span class="hljs-variable">@message</span>).deliver
+      <span class="hljs-constant">MessageMailer</span>.resp(<span class="hljs-variable">@message</span>).deliver
+      redirect_to <span class="hljs-symbol">:action</span> =&gt; <span class="hljs-symbol">:index</span>, <span class="hljs-symbol">:notice</span> =&gt; <span class="hljs-string">'お問い合わせありがとうございました。'</span>
+    <span class="hljs-keyword">else</span>
+      render <span class="hljs-symbol">:action</span> =&gt; <span class="hljs-symbol">:index</span>, <span class="hljs-symbol">:alert</span> =&gt; <span class="hljs-string">'お問い合わせに不備があります。'</span>
+    <span class="hljs-keyword">end</span>
+  <span class="hljs-keyword">end</span>
+
+  <span class="hljs-function"><span class="hljs-keyword">def</span> </span>index
+    <span class="hljs-variable">@notice</span> = params[<span class="hljs-symbol">:notice</span>]
+  <span class="hljs-keyword">end</span>
+
+<span class="hljs-keyword">end</span>
+</code></pre><h3 id="3.メーラーのviewを作成します。"><a name="3.メーラーのviewを作成します。" href="#3.メーラーのviewを作成します。"></a>3.メーラーのviewを作成します。</h3><p>自動返信メールの内容を作成します。<br>【app/views/message_mailer/resp.text.erb】</p><pre><code class="ruby hljs" data-origin="&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;&amp;lt;%= @message.name %&amp;gt; 様
+
+以下の内容でお問い合わせを受け付けました。
+担当より折り返しご連絡させていただきますので
+しばらくお待ちください。
+
+＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+お名前
+&amp;lt;%= @message.name %&amp;gt;
+
+フリガナ
+&amp;lt;%= @message.furigana %&amp;gt;
+
+メールアドレス
+&amp;lt;%= @message.email %&amp;gt;
+
+お問い合わせ内容
+&amp;lt;%= @message.content %&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;">&lt;%= <span class="hljs-variable">@message</span>.name %&gt; 様
+
+以下の内容でお問い合わせを受け付けました。
+担当より折り返しご連絡させていただきますので
+しばらくお待ちください。
+
+＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+お名前
+&lt;%= <span class="hljs-variable">@message</span>.name %&gt;
+
+フリガナ
+&lt;%= <span class="hljs-variable">@message</span>.furigana %&gt;
+
+メールアドレス
+&lt;%= <span class="hljs-variable">@message</span>.email %&gt;
+
+お問い合わせ内容
+&lt;%= <span class="hljs-variable">@message</span>.content %&gt;
+</code></pre><p>動作確認をしてみましょう。</p><p><a href="http://localhost:3000/message">http://localhost:3000/message</a></p><p>メールフォームに入力したアドレスに自動返信メールが来ていれば設置完了です。</p>
+  </div>

@@ -1,0 +1,344 @@
+  <div class="span4">
+    <%= render 'layouts/navbar' %>
+  </div>
+  <div class="span8">
+  	<h1 id="ゼロからデプロイまで"><a name="ゼロからデプロイまで" href="#ゼロからデプロイまで"></a>ゼロからデプロイまで</h1><hr class="page"><h3 id="railsコマンドを使ってmac上にアプリを作成"><a name="railsコマンドを使ってmac上にアプリを作成" href="#railsコマンドを使ってmac上にアプリを作成"></a>Railsコマンドを使ってMac上にアプリを作成</h3><h5 id="初めてのrailsコマンド"><a name="初めてのrailsコマンド" href="#初めてのrailsコマンド"></a>初めてのrailsコマンド</h5><p>これからrailsコマンドを使って、Webアプリケーションのフレーム部分(入れ物のようなもの)を作成します。<br>このrailsコマンドを使用するのは「ターミナル上」です。</p><p>ターミナルを開いてください。</p><p><%= image_tag"img/1_5_001.png", :alt => "terminal" %></p><hr class="underscore"><p>次に環境とできるだけ統一するためにディレクトリをデスクトップに移動します。<br>ターミナル上ではフォルダのことをディレクトリと呼び、このディレクトリが幾層にもなってMacの中身を構成しています。<br>MacのGUI上でよく目にするFinderアプリとデスクトップ画面そのものがありますが、ターミナルはこのFinderと同じ役割をし、ターミナル上ではこのデスクトップ画面もディレクトリになります。<br>試しにfinderアプリを開き、左上メニューバーのGo -&gt; Homeを選択すると、Desktopがディレクトリであることが確認できます。</p><p><%= image_tag"img/1_5_002.png", :alt => "Home directory" %></p><hr class="underscore"><p>ターミナルを開いた初期状態ではこのHomeディレクトリにいる状態になるので、cdコマンドを使ってDesktopディレクトリに移動します。</p><pre><code data-origin="&lt;pre&gt;&lt;code&gt;$ cd Desktop/
+&lt;/code&gt;&lt;/pre&gt;">$ cd Desktop/
+</code></pre><p>現在いるディレクトリのパスを表示するにはpwdコマンドを使います。</p><pre><code data-origin="&lt;pre&gt;&lt;code&gt;$ pwd
+Users/username/Desktop
+&lt;/code&gt;&lt;/pre&gt;">$ pwd
+Users/username/Desktop
+</code></pre><p>(※usernameには、自分のMacに登録しているユーザー名が入ります。)</p><p>これらのコマンドはUnixコマンドといって、ターミナル上での操作に欠かせないコマンドです。<br>Unixコマンドについてものちの章でしっかりと学習していきます。</p><p>さて、ターミナル上でDesktopに移動ができましたので、ここにrailsコマンドを使用してRailsアプリを作成します。<br>アプリを作成するには、<code>rails new アプリ名</code>コマンドを使います。</p><pre><code data-origin="&lt;pre&gt;&lt;code&gt;$ rails new samurai_app
+&lt;/code&gt;&lt;/pre&gt;">$ rails new samurai_app
+</code></pre><p>今回はDesktop上にsamurai_appという名前のアプリを作りました。<br>このアプリ自体もディレクトリの構造体でできており、各場所に必要なファイルを置くことでWebアプリのページや機能を追加していくことになります。</p><p><%= image_tag"img/1_5_003.png", :alt => "rails new" %></p><p>これをデスクトップでも確認することができます。</p><p><%= image_tag"img/1_5_004.png", :alt => "rails new destop" %></p><p>これでRailsアプリのフレームが出来上がりました。</p><hr class="section"><h3 id="git-バージョン管理"><a name="git-バージョン管理" href="#git-バージョン管理"></a>git バージョン管理</h3><h5 id="git-について"><a name="git-について" href="#git-について"></a>git について</h5><p>gitについては<a href="http://blog.asial.co.jp/894">イラストでわかる！git入門の入門</a>を読んでみてください。<br>gitとは何か、gitの各コマンドは何をするものなのかがわかります。</p><h5 id="システムセットアップ"><a name="システムセットアップ" href="#システムセットアップ"></a>システムセットアップ</h5><p>gitのインストールは<a href="http://samurainokatana.herokuapp.com/chapter1_section4/manual5">gitインストール</a>で取り上げているので、まだの方は先にこちらを行ってください。<br>gitのインストール後、最初の1回だけやらなければならない設定があります。<br>これはsystemセットアップと呼ばれ、使用するコンピュータ1台につき1回だけ行います。</p><pre><code data-origin="&lt;pre&gt;&lt;code&gt;$ git config --global user.name &quot;あなたの名前&quot;
+$ git config --global user.email あなたのメールアドレス
+&lt;/code&gt;&lt;/pre&gt;">$ git config --global user.name "あなたの名前"
+$ git config --global user.email あなたのメールアドレス
+</code></pre><p>上記コマンドの日本語の部分だけを自分のものを置き換えてください。</p><h5 id="リポジトリセットアップ"><a name="リポジトリセットアップ" href="#リポジトリセットアップ"></a>リポジトリセットアップ</h5><p>リポジトリとは、貯蔵庫などの意味を持つ英単語でgitで管理したいファイルを貯めておく場所と考えてください。<br>詳細については<a href="http://blog.asial.co.jp/894">イラストでわかる！git入門の入門</a>を参考にしてください。</p><p>このリポジトリセットアップは、毎回リポジトリを作成するたびに(アプリを作成するたび、アプリをgit管理対象にするために)必要な作業になります。</p><p>まず、さきほど作成したrailsアプリのsamurai_app内に移動します。</p><pre><code data-origin="&lt;pre&gt;&lt;code&gt;$ cd samurai_app/
+$ pwd
+/Users/username/Desktop/samurai_app
+&lt;/code&gt;&lt;/pre&gt;">$ cd samurai_app/
+$ pwd
+/Users/username/Desktop/samurai_app
+</code></pre><p>cdコマンドでsamurai_app内に移動し、pwdコマンドで確認します。<br>このsamurai_appというディレクトリが、このアプリのルートディレクトリ(一番基準となる階層のディレクトリ)と呼ばれます。<br>ここでlsコマンドを叩くと、中にあるディレクトリやファイルを確認することができます。</p><pre><code data-origin="&lt;pre&gt;&lt;code&gt;$ ls
+Gemfile        Rakefile    config        lib        test
+Gemfile.lock    app        config.ru    log        tmp
+README.rdoc    bin        db        public        vendor
+&lt;/code&gt;&lt;/pre&gt;">$ ls
+Gemfile        Rakefile    config        lib        test
+Gemfile.lock    app        config.ru    log        tmp
+README.rdoc    bin        db        public        vendor
+</code></pre><p>Finderアプリで確認したときと同じ内容になっているはずです。</p><p><%= image_tag"img/1_5_005.png", :alt => "finder ls" %></p><p>そして、gitのリポジトリセットアップをするにはこのルートディレクトリに移動しておかなければアプリ単位での管理が難しくなるので、覚えておきましょう。</p><p>新しいリポジトリの初期化の仕方は下記のgit initコマンド</p><pre><code data-origin="&lt;pre&gt;&lt;code&gt;$ git init
+Initialized empty Git repository in /Users/username/Desktop/samurai_app/.git/
+&lt;/code&gt;&lt;/pre&gt;">$ git init
+Initialized empty Git repository in /Users/username/Desktop/samurai_app/.git/
+</code></pre><h5 id="追加とコミット"><a name="追加とコミット" href="#追加とコミット"></a>追加とコミット</h5><p>次にアプリのファイルをリポジトリに追加します。</p><pre><code data-origin="&lt;pre&gt;&lt;code&gt;$ git add .
+&lt;/code&gt;&lt;/pre&gt;">$ git add .
+</code></pre><p>追加の次はコミットします。(この流れは覚えておきましょう)</p><pre><code data-origin="&lt;pre&gt;&lt;code&gt;$ git commit -m &quot;Initialize repository&quot;
+[master (root-commit) a2ecc16] Initialize repository
+ 53 files changed, 820 insertions(+)
+ create mode 100644 .gitignore
+ create mode 100644 Gemfile
+ create mode 100644 Gemfile.lock
+ create mode 100644 README.rdoc
+ create mode 100644 Rakefile
+ ・
+ ・
+ ・
+ ・
+&lt;/code&gt;&lt;/pre&gt;">$ git commit -m "Initialize repository"
+[master (root-commit) a2ecc16] Initialize repository
+ 53 files changed, 820 insertions(+)
+ create mode 100644 .gitignore
+ create mode 100644 Gemfile
+ create mode 100644 Gemfile.lock
+ create mode 100644 README.rdoc
+ create mode 100644 Rakefile
+ ・
+ ・
+ ・
+ ・
+</code></pre><p>これでrailsアプリファイルをローカル上(Mac内)に保存することができました。</p><p>※gitの保存先にはMacのローカル上に保存する”git commit”とリモート上のリポジトリ(Web上にあるGithub)に保存する”git push”の2段構えになっていることを覚えておきましょう。</p><hr class="section"><h3 id="github"><a name="github" href="#github"></a>Github</h3><p>続いて、gitで管理しているアプリをリモート上(Web上)で管理するため、Githubというサイトの登録とセットアップをします。<br>Github上にリモートリポジトリを置き、Macのターミナルから遠隔接続(ssh)でアプリのファイルを送ることになります。</p><h5 id="github登録"><a name="github登録" href="#github登録"></a>Github登録</h5><p>こちらの<a href="https://github.com">github公式サイト</a>より登録し、アカウントを作詞絵してください。<br><%= image_tag"img/1_5_006.png", :alt => "github" %></p><h5 id="ssh-key登録"><a name="ssh-key登録" href="#ssh-key登録"></a>ssh key登録</h5><p>続いて、Macのターミナル上から遠隔でGithubにアクセスできるよにMac上でssh keyという鍵を作り、Github上に登録します。</p><p>ssh keyとは、公開鍵と秘密鍵の二対からなる鍵で、公開鍵を遠隔でアクセスしたい場所に渡し、秘密鍵をMac側で管理することで、そのふたつが認証の機能を果たします。</p><p>ssh keyの作成にあたってまずはホームディレクトリ(/Users/username)に移動します。<br>移動先を指定しないcdコマンドでホームディレクトリに移動することができます。</p><pre><code data-origin="&lt;pre&gt;&lt;code&gt;$ cd
+&lt;/code&gt;&lt;/pre&gt;">$ cd
+</code></pre><p>そこで生成コマンドssh-keygenを叩きます。</p><pre><code data-origin="&lt;pre&gt;&lt;code&gt;$ ssh-keygen
+Generating public/private rsa key pair.
+Enter file in which to save the key (/Users/username/.ssh/id_rsa):
+&lt;/code&gt;&lt;/pre&gt;">$ ssh-keygen
+Generating public/private rsa key pair.
+Enter file in which to save the key (/Users/username/.ssh/id_rsa):
+</code></pre><p>すると保存先と鍵の名前を聞かれますので、<code>/Users/username/.ssh/github_rsa</code>と入力してEnterキーを押してください。</p><pre><code data-origin="&lt;pre&gt;&lt;code&gt;$ ssh-keygen
+Generating public/private rsa key pair.
+Enter file in which to save the key (/Users/username/.ssh/id_rsa): /Users/username/.ssh/github_rsa
+Enter passphrase (empty for no passphrase):
+Enter same passphrase again:
+Your identification has been saved in /Users/username/.ssh/github_rsa.
+Your public key has been saved in /Users/username/.ssh/github_rsa.pub.
+The key fingerprint is:
+de:77:4a:52:a1:69:86:7c:ab:7b:81:37:8b:c1:c9:7c username@MbPro.local
+The key's randomart image is:
++--[ RSA 2048]----+
+|                 |
+|                 |
+|            .    |
+|       . . o .   |
+|       +So* .    |
+|       .B=Eo     |
+|        .=++o .  |
+|        ..o+ o   |
+|        oo  .    |
++-----------------+
+&lt;/code&gt;&lt;/pre&gt;">$ ssh-keygen
+Generating public/private rsa key pair.
+Enter file in which to save the key (/Users/username/.ssh/id_rsa): /Users/username/.ssh/github_rsa
+Enter passphrase (empty for no passphrase):
+Enter same passphrase again:
+Your identification has been saved in /Users/username/.ssh/github_rsa.
+Your public key has been saved in /Users/username/.ssh/github_rsa.pub.
+The key fingerprint is:
+de:77:4a:52:a1:69:86:7c:ab:7b:81:37:8b:c1:c9:7c username@MbPro.local
+The key's randomart image is:
++--[ RSA 2048]----+
+|                 |
+|                 |
+|            .    |
+|       . . o .   |
+|       +So* .    |
+|       .B=Eo     |
+|        .=++o .  |
+|        ..o+ o   |
+|        oo  .    |
++-----------------+
+</code></pre><p>鍵を使用するために設定するパスワードを2回求められるので、そのままEnterキー(パスワードなし)を押していくと上記のような表示になり、ssh keyの生成が完了します。</p><p>保存場所を確認すると、github_rsaとgithub_rsa.pubというファイルができています。<br>※ssh keyの保管場所は、ホームディレクトリ以下にある.sshディレクトリになります。(/Users/username/.ssh)<br>この中のgithub_rsa.pubというのが、Github側に登録する公開鍵になります。<br>このファイルの中身を下記コマンドでコピーします。</p><pre><code data-origin="&lt;pre&gt;&lt;code&gt;$ pbcopy &amp;lt; ~/.ssh/github_rsa.pub
+&lt;/code&gt;&lt;/pre&gt;">$ pbcopy &lt; ~/.ssh/github_rsa.pub
+</code></pre><p>次にGithubにログインし、右上のAccount Settingsボタンをクリックします。<br><%= image_tag"img/1_5_007.png", :alt => "github" %></p><p>開いたページの左メニューバーにあるSSH Keysをクリックし、右上のAdd SSH keyボタンをクリックします。<br><%= image_tag"img/1_5_008.png", :alt => "github" %></p><p>でてきたTitle部分にはわかりやすい名前を、keyの部分にはpbcopyコマンドでコピーしたgithub_rsa.pubファイルの中身をペーストします。<br><%= image_tag"img/1_5_009.png", :alt => "github" %></p><p>最後に左下緑色のAdd keyボタンを押して完了です。</p><h5 id="リモートリポジトリ作成"><a name="リモートリポジトリ作成" href="#リモートリポジトリ作成"></a>リモートリポジトリ作成</h5><p>アカウントの作成とssh keyの登録が完了したら、今回Mac上に作成したsamurai_app用のリポジトリをGithub上に作成します。<br>Githubトップページの右下New repositoryボタンを押してください。<br><%= image_tag"img/1_5_010.png", :alt => "github" %></p><p>Repository nameにsamurai_app_githubと入力し、Create repositoryボタンを押してください。<br><%= image_tag"img/1_5_011.png", :alt => "github" %></p><p>下記画面が表示されれば完了です。<br>このページの下に記されたコマンドがあとで必要になりますので、この画面はこのままにしておいてください。<br><%= image_tag"img/1_5_012.png", :alt => "github" %></p><h5 id="pushする"><a name="pushする" href="#pushする"></a>pushする</h5><p>最後に、Mac上にあるrailsアプリ”samurai_app”をGithub上に作成した”samurai_app_github”リポジトリに遠隔で紐付け、保存します。</p><p>ここで先ほどのリポジトリ登録時に表示された必要になると言っていた画面の下にあるふたつのコマンドを使います。<br><%= image_tag"img/1_5_013.png", :alt => "github" %></p><p>最初のコマンドはユーザー名の部分が違いますが、自分のページの該当するものをターミナルでsamurai_appのルートディレクトリに移動してからコピー＆ペーストで打ち込みます。</p><pre><code data-origin="&lt;pre&gt;&lt;code&gt;$ cd ~/Desktop/samurai_app/
+$ git remote add origin git@github.com:shinyahirai/samurai_app_github.git
+&lt;/code&gt;&lt;/pre&gt;">$ cd ~/Desktop/samurai_app/
+$ git remote add origin git@github.com:shinyahirai/samurai_app_github.git
+</code></pre><p>何も表示はありませんが、続けざまに次のコードを叩きます。</p><pre><code data-origin="&lt;pre&gt;&lt;code&gt;$ git push -u origin master
+Counting objects: 60, done.
+Delta compression using up to 4 threads.
+Compressing objects: 100% (49/49), done.
+Writing objects: 100% (60/60), 14.28 KiB | 0 bytes/s, done.
+Total 60 (delta 2), reused 0 (delta 0)
+To git@github.com:shinyahirai/samurai_app_github.git
+ * [new branch]      master -&amp;gt; master
+Branch master set up to track remote branch master from origin.
+&lt;/code&gt;&lt;/pre&gt;">$ git push -u origin master
+Counting objects: 60, done.
+Delta compression using up to 4 threads.
+Compressing objects: 100% (49/49), done.
+Writing objects: 100% (60/60), 14.28 KiB | 0 bytes/s, done.
+Total 60 (delta 2), reused 0 (delta 0)
+To git@github.com:shinyahirai/samurai_app_github.git
+ * [new branch]      master -&gt; master
+Branch master set up to track remote branch master from origin.
+</code></pre><p>これでMac上のrailsアプリであるsamurai_appを、Github上のリポジトリであるsamurai_app_githubに保存することができました。</p><p>先ほどのGithubのリポジトリページを更新するとアプリのディレクトリやファイルがずらりと並んでいるのが確認できます。<br><%= image_tag"img/1_5_014.png", :alt => "github" %></p><hr class="section"><h3 id="デプロイする"><a name="デプロイする" href="#デプロイする"></a>デプロイする</h3><p>railsアプリのデプロイ(Web上に公開すること)に無料ホスティングサービスのherokuを使います。<br>herokuは簡単に言うと、プログラムが動作可能なサーバを無料で使える(しかも簡単に)サービスです。<br>このホスティングサービスの登場により、railsアプリのデプロイがかなり簡単になりました。<br>gitを使ってバージョン管理を行っていたのも、このherokuを使用したいがためです。(※herokuの使用にはgitコマンドが必要なため)</p><h5 id="heroku登録"><a name="heroku登録" href="#heroku登録"></a>heroku登録</h5><p><a href="https://www.heroku.com">heroku公式サイト</a>よりSign up for freeボタンを押してください。<br><%= image_tag"img/1_5_015.png", :alt => "heroku" %></p><p>Sign upのためにEmailアドレスを入れてください。<br><%= image_tag"img/1_5_016.png", :alt => "heroku" %></p><p>herokuから届いたメールを確認し、メール内のリンクをクリック。<br>※迷惑メールに入る可能性もあるので注意</p><p>アカウント登録フォームが開くので、必要事項を記入してアカウントを作成します。<br><%= image_tag"img/1_5_017.png", :alt => "heroku" %></p><p>確認メールが届くので、認証を済ませてログインしておいてください。</p><h5 id="heroku-toolbeltをインストール"><a name="heroku-toolbeltをインストール" href="#heroku-toolbeltをインストール"></a>heroku toolbeltをインストール</h5><p>まずは<a href="https://toolbelt.heroku.com/">heroku toolbelt</a>よりMac OS Xのheroku toolbeltをダウンロードしてください。<br><%= image_tag"img/1_5_018.png", :alt => "heroku" %></p><p>ダウンロードしたファイル”heroku-toolblet.pkg”をクリックし、Mac内にインストールします。<br>インストール手順に沿って”続ける”を押していってください。<br>これによりターミナル上でherokuコマンドが打てるようになります。<br>※実行前にターミナルの終了と再起動が必要な場合があります。</p><h5 id="ssh-key作成"><a name="ssh-key作成" href="#ssh-key作成"></a>ssh key作成</h5><p>先ほどGithub用にssh keyを作成しサイトに登録したように、heroku用のssh keyを作成して公開鍵をheroku上に登録します。</p><p>まずはわかりやすいようホームディレクトリに移動します。</p><pre><code data-origin="&lt;pre&gt;&lt;code&gt;$ cd
+$ pwd
+/Users/username
+&lt;/code&gt;&lt;/pre&gt;">$ cd
+$ pwd
+/Users/username
+</code></pre><p>続いて例に習ってssh keyを作成します。</p><pre><code data-origin="&lt;pre&gt;&lt;code&gt;$ ssh-keygen
+Generating public/private rsa key pair.
+Enter file in which to save the key (/Users/username/.ssh/id_rsa):
+&lt;/code&gt;&lt;/pre&gt;">$ ssh-keygen
+Generating public/private rsa key pair.
+Enter file in which to save the key (/Users/username/.ssh/id_rsa):
+</code></pre><p>ここではheroku用に鍵を作るので、<code>/Users/username/.ssh/heroku_rsa</code>を入力しEnterキーを押します。(usernameには自分のMacのアカウント名)<br>パスワードもGithubの時と同様に何も入れずにEnterキーを押してssh keyを生成します。</p><pre><code data-origin="&lt;pre&gt;&lt;code&gt;$ ssh-keygen
+Generating public/private rsa key pair.
+Enter file in which to save the key (/Users/username/.ssh/id_rsa): /Users/username/.ssh/heroku_rsa
+Enter passphrase (empty for no passphrase):
+Enter same passphrase again:
+Your identification has been saved in /Users/username/.ssh/heroku_rsa.
+Your public key has been saved in /Users/username/.ssh/heroku_rsa.pub.
+The key fingerprint is:
+de:77:4a:52:a1:69:86:7c:ab:7b:81:37:8b:c1:c9:7c username@MbPro.local
+The key's randomart image is:
++--[ RSA 2048]----+
+|                 |
+|                 |
+|            .    |
+|       . . o .   |
+|       +So* .    |
+|       .B=Eo     |
+|        .=++o .  |
+|        ..o+ o   |
+|        oo  .    |
++-----------------+
+&lt;/code&gt;&lt;/pre&gt;">$ ssh-keygen
+Generating public/private rsa key pair.
+Enter file in which to save the key (/Users/username/.ssh/id_rsa): /Users/username/.ssh/heroku_rsa
+Enter passphrase (empty for no passphrase):
+Enter same passphrase again:
+Your identification has been saved in /Users/username/.ssh/heroku_rsa.
+Your public key has been saved in /Users/username/.ssh/heroku_rsa.pub.
+The key fingerprint is:
+de:77:4a:52:a1:69:86:7c:ab:7b:81:37:8b:c1:c9:7c username@MbPro.local
+The key's randomart image is:
++--[ RSA 2048]----+
+|                 |
+|                 |
+|            .    |
+|       . . o .   |
+|       +So* .    |
+|       .B=Eo     |
+|        .=++o .  |
+|        ..o+ o   |
+|        oo  .    |
++-----------------+
+</code></pre><p>※本来は公開鍵のみをそれぞれのサイト用に生成すれば良いのですが、ややこしいためgithubとherokuに分けてそれぞれ二対になる鍵を生成しました。<br>sshの概念に慣れたら演習問題として一つの秘密鍵に対して複数の公開鍵を生成して登録してみてください。</p><p>次に今生成したheroku_rsaとheroku_rsa.pubの公開鍵であるheroku_rsa.pubのほうをheroku上に登録します。<br>これにはいくつか方法がありますが、今回は<code>heroku keys:add</code>コマンドでターミナルから送信することにします。</p><p>まず、ターミナル上でherokuにログインします。<br>herokuに登録したEmailアドレスをパスワードを順に入力し、Enterキーで先に進みます。</p><pre><code data-origin="&lt;pre&gt;&lt;code&gt;$ heroku login
+Enter your Heroku credentials.
+Email: herokuに登録したEmailアドレス
+Password (typing will be hidden): パスワードを打ち込む(画面上には反映されない)
+Found the following SSH public keys:
+1) github_rsa.pub
+2) heroku_rsa.pub
+Which would you like to use with your Heroku account?
+&lt;/code&gt;&lt;/pre&gt;">$ heroku login
+Enter your Heroku credentials.
+Email: herokuに登録したEmailアドレス
+Password (typing will be hidden): パスワードを打ち込む(画面上には反映されない)
+Found the following SSH public keys:
+1) github_rsa.pub
+2) heroku_rsa.pub
+Which would you like to use with your Heroku account?
+</code></pre><p>すると「ssh keyを見つけました。(この場合結果は2つ)。どのキーをherokuアカウントに使用しますか？」と聞かれるので、heroku_rsa.pubの前にある数字を打ち込んでEnterキー。(この場合は2)</p><pre><code data-origin="&lt;pre&gt;&lt;code&gt;$ heroku login
+Enter your Heroku credentials.
+Email: herokuに登録したEmailアドレス
+Password (typing will be hidden): パスワードを打ち込む(画面上には反映されない)
+Found the following SSH public keys:
+1) github_rsa.pub
+2) heroku_rsa.pub
+Which would you like to use with your Heroku account? 2
+Uploading SSH public key /Users/shinyahirai/.ssh/heroku_rsa.pub... done
+&lt;/code&gt;&lt;/pre&gt;">$ heroku login
+Enter your Heroku credentials.
+Email: herokuに登録したEmailアドレス
+Password (typing will be hidden): パスワードを打ち込む(画面上には反映されない)
+Found the following SSH public keys:
+1) github_rsa.pub
+2) heroku_rsa.pub
+Which would you like to use with your Heroku account? 2
+Uploading SSH public key /Users/shinyahirai/.ssh/heroku_rsa.pub... done
+</code></pre><p>これでssh keyはheroku上に登録されました。サイト上で確認してみましょう。<br>ブラウザで<a href="https://dashboard.heroku.com/apps">heroku</a>にログインし、右上のユーザーアイコンからAccountページに移動します。<br><%= image_tag"img/1_5_019.png", :alt => "heroku" %></p><p>開いたページを下にスクロールしていくと、SSH Keysの欄があり、先ほど送信した公開会鍵がひとつ登録されているのが確認できます。</p><p>ターミナル上でherokuコマンドもしっかり使えるようになりました。</p><p>※もし間違って別の公開鍵を登録してしまった場合は、herokuサイトのAccount -&gt; SSH Keysより登録した鍵を削除し、ターミナル上で<code>heroku keys:add</code>コマンドを叩くとどの鍵を登録するか聞かれるところから始まります。</p><pre><code data-origin="&lt;pre&gt;&lt;code&gt;$ heroku keys:add
+Found the following SSH public keys:
+1) github_rsa.pub
+2) heroku_id_rsa.pub
+Which would you like to use with your Heroku account? 2
+Uploading SSH public key /Users/shinyahirai/.ssh/heroku_rsa.pub... done
+&lt;/code&gt;&lt;/pre&gt;">$ heroku keys:add
+Found the following SSH public keys:
+1) github_rsa.pub
+2) heroku_id_rsa.pub
+Which would you like to use with your Heroku account? 2
+Uploading SSH public key /Users/shinyahirai/.ssh/heroku_rsa.pub... done
+</code></pre><h5 id="herokuのセットアップ"><a name="herokuのセットアップ" href="#herokuのセットアップ"></a>herokuのセットアップ</h5><p>続いてherokuにデプロイするためにrailsアプリをセットアップします。<br>railsアプリはデフォルトでsqlite3というデータベースを使用していますが、herokuにデプロイするにはPostgreSQLというデータベースを使用するように変更を加えます。<br>railsアプリにはGemfileというファイルがあり、ここに”gem”というライブラリを必要な分だけ追加することによって機能の大半をアプリに追加することができます。<br>sqlite3やPostgreSQLもこのgemで管理しているため、このGemfileに書き込んでいくのですがその前にひとつ便利な設定をしておきます。<br>以前ダウンロードしたテキストエディタ”Sublime Text2”をターミナル上で<code>subl ファイル名</code>で開けるようにします。</p><p>ホームディレクトリで下記コマンドを自分の環境に合わせて叩いてください。</p><pre><code data-origin="&lt;pre&gt;&lt;code&gt;$ cd
+$ sudo ln -s &quot;/Applications/Sublime Text 2.app/Contents/SharedSupport/bin/subl&quot; /usr/bin/subl
+Password:
+&lt;/code&gt;&lt;/pre&gt;">$ cd
+$ sudo ln -s "/Applications/Sublime Text 2.app/Contents/SharedSupport/bin/subl" /usr/bin/subl
+Password:
+</code></pre><p>パスワードを聞かれますので、Macにログインする際のパスワードを入力しEnterキーを押します。<br>設定はこれだけです。<br><code>subl -h</code>コマンドを叩いてヘルプがでれば問題なく設定は完了しています。</p><p>さて、ST2の設定も済んだのでsamurai_appのGemfileをデプロイできるように書き換えていきましょう。<br>samurai_appのルートディレクトリに移動し、<code>subl Gemfile</code>コマンドでGemfileを開きます。</p><pre><code data-origin="&lt;pre&gt;&lt;code&gt;$ cd Desktop/samurai_app/
+$ pwd
+/Users/username/Desktop/samurai_app
+$ subl Gemfile
+&lt;/code&gt;&lt;/pre&gt;">$ cd Desktop/samurai_app/
+$ pwd
+/Users/username/Desktop/samurai_app
+$ subl Gemfile
+</code></pre><p><%= image_tag"img/1_5_020.png", :alt => "subl Gemfile" %></p><p>Gemfileの中を見ると、ほとんどがコメントアウトされています。<br>このうちのgem ~ という色が赤と黄で表示されているものがgemライブラリたちです。<br>ST2で開いたGemfileを下記と入れ替えてください。</p><pre><code class="ruby hljs" data-origin="&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;source 'https://rubygems.org'
+ruby '2.0.0'
+#ruby-gemset=railstutorial_rails_4_0
+
+gem 'rails', '4.0.4'
+
+group :development do
+  gem 'sqlite3', '1.3.8'
+end
+
+gem 'sass-rails', '4.0.2'
+gem 'uglifier', '2.1.1'
+gem 'coffee-rails', '4.0.1'
+gem 'jquery-rails', '3.0.4'
+gem 'turbolinks', '1.1.1'
+gem 'jbuilder', '1.0.2'
+
+group :doc do
+  gem 'sdoc', '0.3.20', require: false
+end
+
+group :production do
+  gem 'pg', '0.15.1'
+  gem 'rails_12factor', '0.0.2'
+end
+&lt;/code&gt;&lt;/pre&gt;">source <span class="hljs-string">'https://rubygems.org'</span>
+ruby <span class="hljs-string">'2.0.0'</span>
+<span class="hljs-comment">#ruby-gemset=railstutorial_rails_4_0</span>
+
+gem <span class="hljs-string">'rails'</span>, <span class="hljs-string">'4.0.4'</span>
+
+group <span class="hljs-symbol">:development</span> <span class="hljs-keyword">do</span>
+  gem <span class="hljs-string">'sqlite3'</span>, <span class="hljs-string">'1.3.8'</span>
+<span class="hljs-keyword">end</span>
+
+gem <span class="hljs-string">'sass-rails'</span>, <span class="hljs-string">'4.0.2'</span>
+gem <span class="hljs-string">'uglifier'</span>, <span class="hljs-string">'2.1.1'</span>
+gem <span class="hljs-string">'coffee-rails'</span>, <span class="hljs-string">'4.0.1'</span>
+gem <span class="hljs-string">'jquery-rails'</span>, <span class="hljs-string">'3.0.4'</span>
+gem <span class="hljs-string">'turbolinks'</span>, <span class="hljs-string">'1.1.1'</span>
+gem <span class="hljs-string">'jbuilder'</span>, <span class="hljs-string">'1.0.2'</span>
+
+group <span class="hljs-symbol">:doc</span> <span class="hljs-keyword">do</span>
+  gem <span class="hljs-string">'sdoc'</span>, <span class="hljs-string">'0.3.20'</span>, <span class="hljs-symbol">require:</span> <span class="hljs-keyword">false</span>
+<span class="hljs-keyword">end</span>
+
+group <span class="hljs-symbol">:production</span> <span class="hljs-keyword">do</span>
+  gem <span class="hljs-string">'pg'</span>, <span class="hljs-string">'0.15.1'</span>
+  gem <span class="hljs-string">'rails_12factor'</span>, <span class="hljs-string">'0.0.2'</span>
+<span class="hljs-keyword">end</span>
+</code></pre><p><%= image_tag"img/1_5_021.png", :alt => "Gemfile" %></p><p><code>group :development</code>は開発環境でのみ使用したいgemを書き込み、逆に<code>group :production</code>というのは、本番環境でのみこの中に書かれたgemを読み込んでほしい場合に使用します。<br>gem ‘pg’がPostgreSQLであとの数字はバージョンを指定しています。<br>gem ‘rails_12factor’はrailsアプリをherokuにデプロイする際に必要なもう一つのgemです。<br>この場合、開発環境ではsqlite3の1.3.8を使用し、本番環境ではpgの0.15.1を使用しています。</p><p>Gemfileの編集が済んだら必ず保存してください。<br>ST”を選択した状態でcommand + s を押すと上書き保存ができます。</p><p>保存ができたら新しく書き込んだgemをインストールするためにターミナルで以下のコマンドを実行してください。</p><pre><code class="ruby hljs" data-origin="&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;$ bundle install --without production
+&lt;/code&gt;&lt;/pre&gt;"><span class="hljs-variable">$ </span>bundle install --without production
+</code></pre><p>ファイルの更新が終わったらgitに変更をコミットします。</p><pre><code class="ruby hljs" data-origin="&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;$ git commit -a -m &quot;Update Gemfile.lock for Heroku&quot;
+&lt;/code&gt;&lt;/pre&gt;"><span class="hljs-variable">$ </span>git commit -a -m <span class="hljs-string">"Update Gemfile.lock for Heroku"</span>
+</code></pre><h5 id="herokuにデプロイする"><a name="herokuにデプロイする" href="#herokuにデプロイする"></a>herokuにデプロイする</h5><p>最後にherokuにデプロイしてこの章の締め括りとします。</p><p>デプロイするためにheroku上にアプリのリポジトリを作成します。<br>samurai_appのルートディレクトリにいることを確認し、<code>heroku create</code>コマンドを叩いてください。</p><pre><code data-origin="&lt;pre&gt;&lt;code&gt;$ pwd
+/Users/username/Desktop/samurai_app
+$ heroku create
+Creating floating-gorge-8715... done, stack is cedar
+http://floating-gorge-8715.herokuapp.com/ | git@heroku.com:floating-gorge-8715.git
+Git remote heroku added
+&lt;/code&gt;&lt;/pre&gt;">$ pwd
+/Users/username/Desktop/samurai_app
+$ heroku create
+Creating floating-gorge-8715... done, stack is cedar
+http://floating-gorge-8715.herokuapp.com/ | git@heroku.com:floating-gorge-8715.git
+Git remote heroku added
+</code></pre><p>heroku上で左上Appsメニューからアプリが作成されたことを確認できます。</p><p>上記で作成したheroku上のリポジトリ(この場合は<a href="http://floating-gorge-8715.herokuapp.com/)にデプロイします。">http://floating-gorge-8715.herokuapp.com/)にデプロイします。</a></p><pre><code class="ruby hljs" data-origin="&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;$ git push heroku master
+Initializing repository, done.
+Counting objects: 64, done.
+Delta compression using up to 4 threads.
+Compressing objects: 100% (53/53), done.
+Writing objects: 100% (64/64), 14.71 KiB | 0 bytes/s, done.
+Total 64 (delta 5), reused 0 (delta 0)
+・
+・
+・
+・
+To git@heroku.com:floating-gorge-8715.git
+ * [new branch]      master -&amp;gt; master
+&lt;/code&gt;&lt;/pre&gt;"><span class="hljs-variable">$ </span>git push heroku master
+<span class="hljs-constant">Initializing</span> repository, done.
+<span class="hljs-constant">Counting</span> <span class="hljs-symbol">objects:</span> <span class="hljs-number">64</span>, done.
+<span class="hljs-constant">Delta</span> compression using up to <span class="hljs-number">4</span> threads.
+<span class="hljs-constant">Compressing</span> <span class="hljs-symbol">objects:</span> <span class="hljs-number">100</span>% (<span class="hljs-number">53</span>/<span class="hljs-number">53</span>), done.
+<span class="hljs-constant">Writing</span> <span class="hljs-symbol">objects:</span> <span class="hljs-number">100</span>% (<span class="hljs-number">64</span>/<span class="hljs-number">64</span>), <span class="hljs-number">14.71</span> <span class="hljs-constant">KiB</span> | <span class="hljs-number">0</span> bytes/s, done.
+<span class="hljs-constant">Total</span> <span class="hljs-number">64</span> (delta <span class="hljs-number">5</span>), reused <span class="hljs-number">0</span> (delta <span class="hljs-number">0</span>)
+・
+・
+・
+・
+<span class="hljs-constant">To</span> git<span class="hljs-variable">@heroku</span>.<span class="hljs-symbol">com:</span>floating-gorge-<span class="hljs-number">8715</span>.git
+ * [new branch]      master -&gt; master
+</code></pre><p>最後に<code>heroku open</code>コマンドでブラウザでアプリを確認します。</p><pre><code class="ruby hljs" data-origin="&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;$ heroku open
+&lt;/code&gt;&lt;/pre&gt;"><span class="hljs-variable">$ </span>heroku open
+</code></pre><p>上記コマンドを叩くとブラウザでアプリの画面が自動的に開きます。<br><%= image_tag"img/1_5_022.png", :alt => "heroku" %></p><p>上の画像と同じ画面が表示されれば成功です。<br>今はアプリの中に何も仕込んでいないので、”The page you were looking for doesn’t exist”というメッセージが表示されています。</p> 
+  </div>

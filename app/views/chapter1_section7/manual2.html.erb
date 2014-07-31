@@ -1,0 +1,14 @@
+  <div class="span4">
+    <%= render 'layouts/navbar' %>
+  </div>
+  <div class="span8">
+  	  <h1 id="railsのscaffoldコマンド"><a name="railsのscaffoldコマンド" href="#railsのscaffoldコマンド"></a>Railsのscaffoldコマンド</h1><hr class="page"><h3 id="scaffold機能を使ったコマンドの実行"><a name="scaffold機能を使ったコマンドの実行" href="#scaffold機能を使ったコマンドの実行"></a>Scaffold機能を使ったコマンドの実行</h3><p>まずは【test】というRailsアプリケーションを作成します。</p><pre><code class="ruby hljs" data-origin="&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;rails new test
+&lt;/code&gt;&lt;/pre&gt;">rails new test
+</code></pre><p>これでアプリケーションは作成できました。<br>続いてScaffold機能を使ってコントロールやモデルなどを作成するためのコマンドを実行します。</p><pre><code class="ruby hljs" data-origin="&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;rails generate scaffold モデル名
+rails generate scaffold モデル名 フィールド名1:データ型1 ...
+&lt;/code&gt;&lt;/pre&gt;">rails generate scaffold モデル名
+rails generate scaffold モデル名 フィールド名<span class="hljs-number">1</span><span class="hljs-symbol">:</span>データ型<span class="hljs-number">1</span> ...
+</code></pre><p>【test】では仮で「name」カラムと「address」カラムを持つ「list」モデルを作成します。</p><pre><code class="ruby hljs" data-origin="&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;rails generate scaffold list name:string address:string
+&lt;/code&gt;&lt;/pre&gt;">rails generate scaffold list <span class="hljs-symbol">name:</span>string <span class="hljs-symbol">address:</span>string
+</code></pre><p>Scaffold機能を使ったコマンドを実行すればコントローラー、アクション、ビュー、モデルなどが一通り作成され、Scaffoldだけでデータの追加や閲覧といった基本的な機能を持つアプリケーションが作成さます。</p><hr class="section"><p><a href="http://railstutorial.jp/chapters/a-demo-app?version=4.0#sec-demo_users_resource">railstutorial　Users リソース</a></p>
+  </div>

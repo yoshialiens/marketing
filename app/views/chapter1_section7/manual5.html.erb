@@ -1,0 +1,20 @@
+  <div class="span4">
+    <%= render 'layouts/navbar' %>
+  </div>
+  <div class="span8">
+  	<h1 id="herokuにpush"><a name="herokuにpush" href="#herokuにpush"></a>herokuにpush</h1><hr class="page"><h3 id="githubで行ったように、gitでherokuリポジトリへプッシュします。"><a name="githubで行ったように、gitでherokuリポジトリへプッシュします。" href="#githubで行ったように、gitでherokuリポジトリへプッシュします。"></a>githubで行ったように、gitでherokuリポジトリへプッシュします。</h3><pre><code class="ruby hljs" data-origin="&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;$ git remote add heroku [herokuのリポジトリURL]
+※gerokuのURL→ex.git@heroku.com:samuraijuku.git
+$ git add .
+$ git pull —rebase heroku master
+$ git commit -m “heroku_test”
+$ git push heroku master
+&lt;/code&gt;&lt;/pre&gt;"><span class="hljs-variable">$ </span>git remote add heroku [herokuのリポジトリ<span class="hljs-constant">URL</span>]
+※gerokuの<span class="hljs-constant">URL</span>→ex.git<span class="hljs-variable">@heroku</span>.<span class="hljs-symbol">com:</span>samuraijuku.git
+<span class="hljs-variable">$ </span>git add .
+<span class="hljs-variable">$ </span>git pull —rebase heroku master
+<span class="hljs-variable">$ </span>git commit -m “heroku_test”
+<span class="hljs-variable">$ </span>git push heroku master
+</code></pre><hr class="section"><h3 id="heroku側のデータベース（postgresql）をマイグレートする。"><a name="heroku側のデータベース（postgresql）をマイグレートする。" href="#heroku側のデータベース（postgresql）をマイグレートする。"></a>heroku側のデータベース（postgreSQL）をマイグレートする。</h3><pre><code class="ruby hljs" data-origin="&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;heroku rake db:migrate
+&lt;/code&gt;&lt;/pre&gt;">heroku rake <span class="hljs-symbol">db:</span>migrate
+</code></pre><hr class="section"><p><a href="http://railstutorial.jp/chapters/beginning?version=4.0#sec-heroku_setup">railstutorial　Herokuのセットアップ</a></p><p><a href="http://railstutorial.jp/chapters/beginning?version=4.0#sec-heroku_step_one">railstutorial　Herokuにデプロイする</a></p><p><a href="http://railstutorial.jp/chapters/beginning?version=4.0#sec-heroku_commands">railstutorial　Herokuコマンド</a></p>
+  </div>

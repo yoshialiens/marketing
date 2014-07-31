@@ -1,0 +1,49 @@
+  <div class="span4">
+    <%= render 'layouts/navbar4' %>
+  </div>
+  <div class="span8">
+  	<h1 id="必要なdbを考える"><a name="必要なdbを考える" href="#必要なdbを考える"></a>必要なDBを考える</h1><hr class="page"><p>まずはどのようなテーブルが必要かを考えてみましょう。</p><p>データベースは、入力したデータを後から取り出せるように保存しておくためのものです。<br>前セクションで作成したモックアップ、画面遷移図を確認しながら、入力フォームで入力するデータをリストアップしていきます。</p><p>ブログシステムを参考にデータベースを考えていきましょう。</p><h5 id="画面遷移図を確認してみましょう。"><a name="画面遷移図を確認してみましょう。" href="#画面遷移図を確認してみましょう。"></a>画面遷移図を確認してみましょう。</h5><hr class="section"><p><%= image_tag"4_4_003.gif", :alt => "画面遷移図" %></p><hr class="section"><p>入力フォームで入力する項目は</p><h3 id="新規記事登録フォーム"><a name="新規記事登録フォーム" href="#新規記事登録フォーム"></a>新規記事登録フォーム</h3><hr class="section"><ul>
+<li>タイトル</li>
+<li>投稿内容</li>
+</ul><hr class="section"><h3 id="詳細記事ページ"><a name="詳細記事ページ" href="#詳細記事ページ"></a>詳細記事ページ</h3><hr class="section"><ul>
+<li>コメント者</li>
+<li>コメント内容</li>
+</ul><hr class="section"><p>投稿内容（新規記事登録フォーム）とコメント（詳細記事ページ）の2つのデータベースが必要になりそうです。</p><p>それぞれのテーブル名を考えていきます。<br>テーブル名、カラム名は日本語は使えないので英字で名称をつけていきます。<br>できるだけほかの人がみてもデータ内容がイメージできる名前をつけていきましょう。</p><hr class="section"><p>【テーブル1】投稿内容　テーブル名【post】  </p><hr class="section"><ul>
+<li>タイトル【post_title】 </li>
+<li>投稿内容【post】 </li>
+</ul><hr class="section"><p>【テーブル2】コメント内容　テーブル名【comment】  </p><hr class="section"><ul>
+<li>コメント者【commentter】 </li>
+<li>コメント内容【comment】 </li>
+</ul><hr class="section"><p>以上で画面上からはDBを抜き出しましたが、<br>追加しておいたほうがよいカラムがあります。</p><ul>
+<li><p>ID【id】<br>データの識別番号、他のデータと重複しないデータです。</p>
+</li>
+<li><p>登録日時【created_at】<br>データが登録された日時です。</p>
+</li>
+<li><p>更新日時【updated_at】<br>データが更新された日時です。</p>
+</li>
+</ul><hr class="section"><p>以上3つのカラムを追加してデータベースの大枠設計が完了しました。</p><hr class="section"><p>【テーブル1】投稿内容　テーブル名【post】  </p><hr class="section"><ul>
+<li>ID【id】 </li>
+<li>タイトル【post_title】 </li>
+<li>投稿内容【post】 </li>
+<li>登録日時【created_at】</li>
+<li>更新日時【updated_at】</li>
+</ul><hr class="section"><p>【テーブル2】コメント内容　テーブル名【comment】  </p><hr class="section"><ul>
+<li>ID【id】 </li>
+<li>コメント者【commentter】 </li>
+<li>コメント内容【comment】 </li>
+<li>登録日時【created_at】</li>
+<li>更新日時【updated_at】</li>
+</ul><hr class="section"><p>残りの作業は各カラムのデータ形式を決めていきます。</p><p>idなどの数値であれば【数値型】（integer）<br>タイトルや投稿内容は【文字列型】（string）<br>登録日時、更新日時は【日付時刻型】（datetime)  </p><p>となります。カラムに保存されるデータを想定し適切なデータ形式を割り当てます。</p><hr class="section"><p>【テーブル1】投稿内容　テーブル名【post】  </p><hr class="section"><ul>
+<li>ID【id】（integer） </li>
+<li>タイトル【post_title】（string） </li>
+<li>投稿内容【post】 （string）</li>
+<li>登録日時【created_at】（datetime)</li>
+<li>更新日時【updated_at】（datetime)</li>
+</ul><hr class="section"><p>【テーブル2】コメント内容　テーブル名【comment】  </p><hr class="section"><ul>
+<li>ID【id】 </li>
+<li>コメント者【commentter】 （string）</li>
+<li>コメント内容【comment】 （string）</li>
+<li>登録日時【created_at】（datetime)</li>
+<li>更新日時【updated_at】（datetime)</li>
+</ul><hr class="section"><p>以上を例に作りたいWebサービスのデータベースを設計してみてください。</p>
+  </div>

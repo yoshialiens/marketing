@@ -1,0 +1,88 @@
+  <div class="span4">
+    <%= render 'layouts/navbar3' %>
+  </div>
+  <div class="span8">
+  	<h1 id="画像アップロード機能を実装する"><a name="画像アップロード機能を実装する" href="#画像アップロード機能を実装する"></a>画像アップロード機能を実装する</h1><hr class="page"><h3 id="1.paperclipに必要なアプリケーションをインストールする"><a name="1.paperclipに必要なアプリケーションをインストールする" href="#1.paperclipに必要なアプリケーションをインストールする"></a>1.paperclipに必要なアプリケーションをインストールする</h3><p>「paperclip」を使用するためには【imagemagick】という画像編集ツールです。<br>今回は「Homebrew」を使い、「imagemagick」をインストールしましょう。</p><pre><code class="ruby hljs" data-origin="&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;$ brew install imagemagick
+&lt;/code&gt;&lt;/pre&gt;"><span class="hljs-variable">$ </span>brew install imagemagick
+</code></pre><hr class="section"><h3 id="2.paperclipをインストール"><a name="2.paperclipをインストール" href="#2.paperclipをインストール"></a>2.paperclipをインストール</h3><h4 id="2-1.gemfileにpaperclipの内容を追記"><a name="2-1.gemfileにpaperclipの内容を追記" href="#2-1.gemfileにpaperclipの内容を追記"></a>2-1.Gemfileにpaperclipの内容を追記</h4><p>※必ず3.0以上のバージョンをインストールしましょう。</p><pre><code class="ruby hljs" data-origin="&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;gem 'paperclip', github: 'thoughtbot/paperclip'
+&lt;/code&gt;&lt;/pre&gt;">gem <span class="hljs-string">'paperclip'</span>, <span class="hljs-symbol">github:</span> <span class="hljs-string">'thoughtbot/paperclip'</span>
+</code></pre><h4 id="2-2.bundle-installを実行する"><a name="2-2.bundle-installを実行する" href="#2-2.bundle-installを実行する"></a>2-2.bundle installを実行する</h4><pre><code class="ruby hljs" data-origin="&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;$ bundle install
+&lt;/code&gt;&lt;/pre&gt;"><span class="hljs-variable">$ </span>bundle install
+</code></pre><hr class="section"><h3 id="3.micropostモデルにpaperclip用のカラム「avatar」を追加する"><a name="3.micropostモデルにpaperclip用のカラム「avatar」を追加する" href="#3.micropostモデルにpaperclip用のカラム「avatar」を追加する"></a>3.Micropostモデルにpaperclip用のカラム「avatar」を追加する</h3><h4 id="3-1.micropostモデルにavatarを追加"><a name="3-1.micropostモデルにavatarを追加" href="#3-1.micropostモデルにavatarを追加"></a>3-1.Micropostモデルにavatarを追加</h4><pre><code class="ruby hljs" data-origin="&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;$ rails g paperclip micropost avatar
+&lt;/code&gt;&lt;/pre&gt;"><span class="hljs-variable">$ </span>rails g paperclip micropost avatar
+</code></pre><h4 id="3-2.生成されたマイグレーションファイルを確認します"><a name="3-2.生成されたマイグレーションファイルを確認します" href="#3-2.生成されたマイグレーションファイルを確認します"></a>3-2.生成されたマイグレーションファイルを確認します</h4><p>【db/migrate/2014○○○○_add_attchment_avatar_to_microposts.rb】</p><pre><code class="ruby hljs" data-origin="&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;class AddAttachmentAvatarToMicroposts &amp;lt; ActiveRecord::Migration
+  def self.up
+    change_table :microposts do |t|
+      t.attachment :avatar
+    end
+  end
+
+  def self.down
+    drop_attached_file :microposts, :avatar
+  end
+end
+&lt;/code&gt;&lt;/pre&gt;"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">AddAttachmentAvatarToMicroposts</span> <span class="hljs-inheritance">&lt; <span class="hljs-parent">ActiveRecord::Migration</span></span></span>
+  <span class="hljs-function"><span class="hljs-keyword">def</span> </span><span class="hljs-keyword">self</span>.up
+    change_table <span class="hljs-symbol">:microposts</span> <span class="hljs-keyword">do</span> |t|
+      t.attachment <span class="hljs-symbol">:avatar</span>
+    <span class="hljs-keyword">end</span>
+  <span class="hljs-keyword">end</span>
+
+  <span class="hljs-function"><span class="hljs-keyword">def</span> </span><span class="hljs-keyword">self</span>.down
+    drop_attached_file <span class="hljs-symbol">:microposts</span>, <span class="hljs-symbol">:avatar</span>
+  <span class="hljs-keyword">end</span>
+<span class="hljs-keyword">end</span>
+</code></pre><h4 id="3-3.データベースに反映（マイグレーション）"><a name="3-3.データベースに反映（マイグレーション）" href="#3-3.データベースに反映（マイグレーション）"></a>3-3.データベースに反映（マイグレーション）</h4><pre><code class="ruby hljs" data-origin="&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;$ rake db:migrate
+&lt;/code&gt;&lt;/pre&gt;"><span class="hljs-variable">$ </span>rake <span class="hljs-symbol">db:</span>migrate
+</code></pre><h3 id="4.micropost.rbにavatarを定義する"><a name="4.micropost.rbにavatarを定義する" href="#4.micropost.rbにavatarを定義する"></a>4.micropost.rbにavatarを定義する</h3><p>【app/models/micropost.rb】 に先ほど作成した「avatar」カラムを定義します。</p><pre><code class="ruby hljs" data-origin="&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;class Micropost &amp;lt; ActiveRecord::Base
+
+　＜・・・中略・・・＞
+
+  has_attached_file :avatar, styles: { medium: &quot;80x80&amp;gt;&quot;, thumb: &quot;50x50&amp;gt;&quot; }
+  validates_attachment_content_type :avatar, :content_type =&amp;gt; [&quot;image/jpg&quot;, &quot;image/jpeg&quot;, &quot;image/png&quot;, &quot;image/gif&quot;]
+
+　＜・・・中略・・・＞
+
+end
+&lt;/code&gt;&lt;/pre&gt;"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Micropost</span> <span class="hljs-inheritance">&lt; <span class="hljs-parent">ActiveRecord::Base</span></span></span>
+
+　＜・・・中略・・・＞
+
+  has_attached_file <span class="hljs-symbol">:avatar</span>, <span class="hljs-symbol">styles:</span> { <span class="hljs-symbol">medium:</span> <span class="hljs-string">"80x80&gt;"</span>, <span class="hljs-symbol">thumb:</span> <span class="hljs-string">"50x50&gt;"</span> }
+  validates_attachment_content_type <span class="hljs-symbol">:avatar</span>, <span class="hljs-symbol">:content_type</span> =&gt; [<span class="hljs-string">"image/jpg"</span>, <span class="hljs-string">"image/jpeg"</span>, <span class="hljs-string">"image/png"</span>, <span class="hljs-string">"image/gif"</span>]
+
+　＜・・・中略・・・＞
+
+<span class="hljs-keyword">end</span>
+</code></pre><h3 id="5.microposts_controller.rbにavatar"><a name="5.microposts_controller.rbにavatar" href="#5.microposts_controller.rbにavatar"></a>5.microposts_controller.rbにavatar</h3><p>【app/controllers/microposts_controller.rb】 に「avatar」を呼び込むように追加します。</p><pre><code class="ruby hljs" data-origin="&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;private
+
+    def micropost_params
+      params.require(:micropost).permit(:content, :avatar)
+    end
+&lt;/code&gt;&lt;/pre&gt;">private
+
+    <span class="hljs-function"><span class="hljs-keyword">def</span> </span>micropost_params
+      params.<span class="hljs-keyword">require</span>(<span class="hljs-symbol">:micropost</span>).permit(<span class="hljs-symbol">:content</span>, <span class="hljs-symbol">:avatar</span>)
+    <span class="hljs-keyword">end</span>
+</code></pre><h3 id="5.投稿フォーム（/_micropost_form.html.erb）にアップロード用のフィールドを追加"><a name="5.投稿フォーム（/_micropost_form.html.erb）にアップロード用のフィールドを追加" href="#5.投稿フォーム（/_micropost_form.html.erb）にアップロード用のフィールドを追加"></a>5.投稿フォーム（/_micropost_form.html.erb）にアップロード用のフィールドを追加</h3><p>【app/views/shared/_micropost_form.html.erb】 にフィールドを追加します。</p><pre><code class="ruby hljs" data-origin="&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;&amp;lt;div class=&quot;field&quot;&amp;gt;
+  &amp;lt;%= f.label :avatar %&amp;gt;
+  &amp;lt;%= f.file_field :avatar %&amp;gt;
+&amp;lt;/div&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;">&lt;div class="field"&gt;
+  &lt;%= f.label :avatar %&gt;
+  &lt;%= f.file_field :avatar %&gt;
+&lt;/div&gt;
+</code></pre><h3 id="6._feed_item.html.erbに画像を表示させる"><a name="6._feed_item.html.erbに画像を表示させる" href="#6._feed_item.html.erbに画像を表示させる"></a>6._feed_item.html.erbに画像を表示させる</h3><p>app/views/shared/_feed_item.html.erb</p><pre><code class="ruby hljs" data-origin="&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;&amp;lt;p&amp;gt;
+&amp;lt;%= image_tag feed_item.avatar.url %&amp;gt;
+&amp;lt;/p&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;">&lt;p&gt;
+&lt;%= image_tag feed_item.avatar.url %&gt;
+&lt;/p&gt;
+</code></pre><p>なお、出力サイズを指定する場合は以下の記述をしましょう。</p><pre><code class="ruby hljs" data-origin="&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;&amp;lt;%= image_tag feed_item.avatar.url(:medium) %&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;">&lt;%= image_tag feed_item.avatar.url(<span class="hljs-symbol">:medium</span>) %&gt;
+</code></pre><pre><code class="ruby hljs" data-origin="&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;&amp;lt;%= image_tag feed_item.avatar.url(:thumb) %&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;">&lt;%= image_tag feed_item.avatar.url(<span class="hljs-symbol">:thumb</span>) %&gt;
+</code></pre><h3 id="7.保存先を確認"><a name="7.保存先を確認" href="#7.保存先を確認"></a>7.保存先を確認</h3><p>アプロードされた画像ファイルは以下のディレクトリに保存されます。</p><pre><code class="ruby hljs" data-origin="&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;public/system/posts/avatars/../../../..
+&lt;/code&gt;&lt;/pre&gt;">public/system/posts/avatars/../../../..
+</code></pre>
+  </div>

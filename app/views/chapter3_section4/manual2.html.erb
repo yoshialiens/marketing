@@ -1,0 +1,100 @@
+  <div class="span4">
+    <%= render 'layouts/navbar3' %>
+  </div>
+  <div class="span8">
+  	<h1 id="投稿時にメールを送信する"><a name="投稿時にメールを送信する" href="#投稿時にメールを送信する"></a>投稿時にメールを送信する</h1><hr class="page"><h3 id="1.メール送信設定"><a name="1.メール送信設定" href="#1.メール送信設定"></a>1.メール送信設定</h3><p>【config/environments/development.rb】<br>【config/environments/test.rb】にメーラーの設定を追加します。<br>※メールアドレスとパスワードは、なるべくサブのものを用意して使用しましょう。</p><pre><code class="ruby hljs" data-origin="&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;config.action_mailer.delivery_method = :smtp
+config.action_mailer.raise_delivery_errors = true
+config.action_mailer.smtp_settings = {
+  :enable_starttls_auto =&amp;gt; true,
+  :address =&amp;gt; 'smtp.gmail.com',
+  :port =&amp;gt; '587',
+  :domain =&amp;gt; 'smtp.gmail.com',
+  :authentication =&amp;gt; 'plain',
+  :user_name =&amp;gt; 'ユーザー名@gmail.com',
+  :password =&amp;gt; 'gmailパスワード'
+  }
+&lt;/code&gt;&lt;/pre&gt;">config.action_mailer.delivery_method = <span class="hljs-symbol">:smtp</span>
+config.action_mailer.raise_delivery_errors = <span class="hljs-keyword">true</span>
+config.action_mailer.smtp_settings = {
+  <span class="hljs-symbol">:enable_starttls_auto</span> =&gt; <span class="hljs-keyword">true</span>,
+  <span class="hljs-symbol">:address</span> =&gt; <span class="hljs-string">'smtp.gmail.com'</span>,
+  <span class="hljs-symbol">:port</span> =&gt; <span class="hljs-string">'587'</span>,
+  <span class="hljs-symbol">:domain</span> =&gt; <span class="hljs-string">'smtp.gmail.com'</span>,
+  <span class="hljs-symbol">:authentication</span> =&gt; <span class="hljs-string">'plain'</span>,
+  <span class="hljs-symbol">:user_name</span> =&gt; <span class="hljs-string">'ユーザー名@gmail.com'</span>,
+  <span class="hljs-symbol">:password</span> =&gt; <span class="hljs-string">'gmailパスワード'</span>
+  }
+</code></pre><h3 id="2.メーラークラスを自動生成"><a name="2.メーラークラスを自動生成" href="#2.メーラークラスを自動生成"></a>2.メーラークラスを自動生成</h3><p>メール送信用メーラーのクラスをgenerateします。<br>今回はmicropostというメーラーとsendmailというメソッドをを作成します。</p><pre><code class="ruby hljs" data-origin="&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;$ rails generate mailer Micropostsendmail sendmail
+&lt;/code&gt;&lt;/pre&gt;"><span class="hljs-variable">$ </span>rails generate mailer <span class="hljs-constant">Micropostsendmail</span> sendmail
+</code></pre><p>※「rails generate mailer [クラス名]　[メソッド名]」</p><h3 id="3.メーラークラスの編集"><a name="3.メーラークラスの編集" href="#3.メーラークラスの編集"></a>3.メーラークラスの編集</h3><p>作成された、【app/mailers/micropostsendmail.rb】を編集します。</p><p>【送信元メールアドレス】には送信元となるメールアドレスを設定<br>【送信先メールアドレス】にはメールを受け取りたいアドレスを設定</p><pre><code class="ruby hljs" data-origin="&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;# coding: utf-8
+
+class Micropostsendmail &amp;lt; ActionMailer::Base
+  default from: &quot;【送信元メールアドレス】&quot;
+
+  # Subject can be set in your I18n file at config/locales/en.yml
+  # with the following lookup:
+  #
+  #   en.test_mailer.sendmail.subject
+  #
+
+  def sendmail(micropost)
+    @micropost = micropost
+
+    mail(:to =&amp;gt; &quot;【送信先メールアドレス】&quot;,
+   :subject =&amp;gt; 'コメントが追加されました')
+  end
+end
+&lt;/code&gt;&lt;/pre&gt;"><span class="hljs-comment"># coding: utf-8</span>
+
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Micropostsendmail</span> <span class="hljs-inheritance">&lt; <span class="hljs-parent">ActionMailer::Base</span></span></span>
+  default <span class="hljs-symbol">from:</span> <span class="hljs-string">"【送信元メールアドレス】"</span>
+
+  <span class="hljs-comment"># Subject can be set in your I18n file at config/locales/en.yml</span>
+  <span class="hljs-comment"># with the following lookup:</span>
+  <span class="hljs-comment">#</span>
+  <span class="hljs-comment">#   en.test_mailer.sendmail.subject</span>
+  <span class="hljs-comment">#</span>
+
+  <span class="hljs-function"><span class="hljs-keyword">def</span> </span>sendmail(micropost)
+    <span class="hljs-variable">@micropost</span> = micropost
+
+    mail(<span class="hljs-symbol">:to</span> =&gt; <span class="hljs-string">"【送信先メールアドレス】"</span>,
+   <span class="hljs-symbol">:subject</span> =&gt; <span class="hljs-string">'コメントが追加されました'</span>)
+  <span class="hljs-keyword">end</span>
+<span class="hljs-keyword">end</span>
+</code></pre><h3 id="4.メールテンプレートの編集"><a name="4.メールテンプレートの編集" href="#4.メールテンプレートの編集"></a>4.メールテンプレートの編集</h3><p>【app/views/micropostsendmail/sendmail.text.erb】を編集します。<br>この内容がそのままメールで送られてきます。</p><pre><code class="ruby hljs" data-origin="&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;&amp;lt;%= @micropost.created_at %&amp;gt;に記事が投稿されました。
+
+投稿内容
+========================
+&amp;lt;%= @micropost.content %&amp;gt;
+========================
+&lt;/code&gt;&lt;/pre&gt;">&lt;%= <span class="hljs-variable">@micropost</span>.created_at %&gt;に記事が投稿されました。
+
+投稿内容
+========================
+&lt;%= <span class="hljs-variable">@micropost</span>.content %&gt;
+========================
+</code></pre><h3 id="5.コメントコントローラーの編集"><a name="5.コメントコントローラーの編集" href="#5.コメントコントローラーの編集"></a>5.コメントコントローラーの編集</h3><p>【app/controllers/microposts_controller.rb】を編集<br>Micropostsendmail.sendmail(@micropost).deliver を追記</p><pre><code class="ruby hljs" data-origin="&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;  def create
+    @micropost = current_user.microposts.build(micropost_params)
+    if @micropost.save
+      flash[:success] = &quot;Micropost created!&quot;
+      Micropostsendmail.sendmail(@micropost).deliver
+      redirect_to root_url
+    else
+      @feed_items = []
+      render 'static_pages/home'
+    end
+  end
+&lt;/code&gt;&lt;/pre&gt;">  <span class="hljs-function"><span class="hljs-keyword">def</span> </span>create
+    <span class="hljs-variable">@micropost</span> = current_user.microposts.build(micropost_params)
+    <span class="hljs-keyword">if</span> <span class="hljs-variable">@micropost</span>.save
+      flash[<span class="hljs-symbol">:success</span>] = <span class="hljs-string">"Micropost created!"</span>
+      <span class="hljs-constant">Micropostsendmail</span>.sendmail(<span class="hljs-variable">@micropost</span>).deliver
+      redirect_to root_url
+    <span class="hljs-keyword">else</span>
+      <span class="hljs-variable">@feed_items</span> = []
+      render <span class="hljs-string">'static_pages/home'</span>
+    <span class="hljs-keyword">end</span>
+  <span class="hljs-keyword">end</span>
+</code></pre><h3 id="6.メールが送信されたかを確認する"><a name="6.メールが送信されたかを確認する" href="#6.メールが送信されたかを確認する"></a>6.メールが送信されたかを確認する</h3><p>local環境で実際に投稿をして、設定アドレスに送信されているか確認してください。</p><p>以上で投稿時のメール送信設定は終了となります！</p>
+  </div>

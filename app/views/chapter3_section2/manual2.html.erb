@@ -1,0 +1,78 @@
+  <div class="span4">
+    <%= render 'layouts/navbar3' %>
+  </div>
+  <div class="span8">
+  	<h1 id="新しい記事に『new』を表示させる"><a name="新しい記事に『new』を表示させる" href="#新しい記事に『new』を表示させる"></a>新しい記事に『new』を表示させる</h1><hr class="page"><p>今回は24時間以内に投稿されたものに『new』を表示させたいと思います。</p><p>【app/views/shared/_feed_item.html.erb】<br>このファイルを編集していきます。</p><hr class="section"><h3 id="1.現在時刻取得"><a name="1.現在時刻取得" href="#1.現在時刻取得"></a>1.現在時刻取得</h3><pre><code class="ruby hljs" data-origin="&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;&amp;lt;% t = Time.now %&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;">&lt;% t = <span class="hljs-constant">Time</span>.now %&gt;
+</code></pre><h3 id="2.整数に変換"><a name="2.整数に変換" href="#2.整数に変換"></a>2.整数に変換</h3><pre><code class="ruby hljs" data-origin="&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;&amp;lt;% timeInteger = t.tv_sec %&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;">&lt;% timeInteger = t.tv_sec %&gt;
+</code></pre><h3 id="3.newを出す日数を設定（１日の場合）"><a name="3.newを出す日数を設定（１日の場合）" href="#3.newを出す日数を設定（１日の場合）"></a>3.NEWを出す日数を設定（１日の場合）</h3><pre><code class="ruby hljs" data-origin="&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;&amp;lt;% newd = 1 %&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;">&lt;% newd = <span class="hljs-number">1</span> %&gt;
+</code></pre><h3 id="4.経過時間を計算(設定日数×24時間)"><a name="4.経過時間を計算(設定日数×24時間)" href="#4.経過時間を計算(設定日数×24時間)"></a>4.経過時間を計算(設定日数×24時間)</h3><pre><code class="ruby hljs" data-origin="&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;&amp;lt;% newd = newd * 86400 %&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;">&lt;% newd = newd * <span class="hljs-number">86400</span> %&gt;
+</code></pre><h3 id="5.micropost作成時間を取得（整数に変換）"><a name="5.micropost作成時間を取得（整数に変換）" href="#5.micropost作成時間を取得（整数に変換）"></a>5.Micropost作成時間を取得（整数に変換）</h3><pre><code class="ruby hljs" data-origin="&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;&amp;lt;% pt = micropost.created_at.tv_sec %&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;">&lt;% pt = micropost.created_at.tv_sec %&gt;
+</code></pre><h3 id="6.micropost作成時間から経過時間を計算"><a name="6.micropost作成時間から経過時間を計算" href="#6.micropost作成時間から経過時間を計算"></a>6.Micropost作成時間から経過時間を計算</h3><pre><code class="ruby hljs" data-origin="&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;&amp;lt;% pt = timeInteger - pt %&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;">&lt;% pt = timeInteger - pt %&gt;
+</code></pre><h3 id="7.経過時間がnewを出す日数以下ならnewを表示"><a name="7.経過時間がnewを出す日数以下ならnewを表示" href="#7.経過時間がnewを出す日数以下ならnewを表示"></a>7.経過時間がNEWを出す日数以下ならNEWを表示</h3><pre><code class="ruby hljs" data-origin="&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;&amp;lt;% if pt &amp;lt; newd then %&amp;gt;
+New
+&amp;lt;% end %&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;">&lt;% <span class="hljs-keyword">if</span> pt &lt; newd <span class="hljs-keyword">then</span> %&gt;
+<span class="hljs-constant">New</span>
+&lt;% <span class="hljs-keyword">end</span> %&gt;
+</code></pre><h3 id="8._feed_item.html.erb参考ソース"><a name="8._feed_item.html.erb参考ソース" href="#8._feed_item.html.erb参考ソース"></a>8._feed_item.html.erb参考ソース</h3><pre><code class="ruby hljs" data-origin="&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;&amp;lt;% t = Time.now %&amp;gt;
+&amp;lt;% timeInteger = t.tv_sec %&amp;gt;
+&amp;lt;% newd = 1 %&amp;gt;
+&amp;lt;% newd = newd * 86400 %&amp;gt;
+&amp;lt;% pt = feed_item.created_at.tv_sec %&amp;gt;
+&amp;lt;% pt = timeInteger - pt %&amp;gt;
+
+&amp;lt;li id=&quot;&amp;lt;%= feed_item.id %&amp;gt;&quot;&amp;gt;
+
+  &amp;lt;%= link_to gravatar_for(feed_item.user), feed_item.user %&amp;gt;
+    &amp;lt;span class=&quot;user&quot;&amp;gt;
+      &amp;lt;% if pt &amp;lt; newd then %&amp;gt;
+      New
+      &amp;lt;% end %&amp;gt;
+      &amp;lt;%= link_to feed_item.user.name, feed_item.user %&amp;gt;
+    &amp;lt;/span&amp;gt;
+    &amp;lt;span class=&quot;content&quot;&amp;gt;&amp;lt;%= feed_item.content %&amp;gt;&amp;lt;/span&amp;gt;
+    &amp;lt;span class=&quot;timestamp&quot;&amp;gt;
+      Posted &amp;lt;%= time_ago_in_words(feed_item.created_at) %&amp;gt; ago.
+    &amp;lt;/span&amp;gt;
+  &amp;lt;% if current_user?(feed_item.user) %&amp;gt;
+    &amp;lt;%= link_to &quot;delete&quot;, feed_item, method: :delete,
+                                     data: { confirm: &quot;You sure?&quot; },
+                                     title: feed_item.content %&amp;gt;
+  &amp;lt;% end %&amp;gt;
+&amp;lt;/li&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;">&lt;% t = Time.now %&gt;
+&lt;% timeInteger = t.tv_sec %&gt;
+&lt;% newd = 1 %&gt;
+&lt;% newd = newd * 86400 %&gt;
+&lt;% pt = feed_item.created_at.tv_sec %&gt;
+&lt;% pt = timeInteger - pt %&gt;
+
+&lt;li id="&lt;%= feed_item.id %&gt;"&gt;
+
+  &lt;%= link_to gravatar_for(feed_item.user), feed_item.user %&gt;
+    &lt;span class="user"&gt;
+      &lt;% if pt &lt; newd then %&gt;
+      New
+      &lt;% end %&gt;
+      &lt;%= link_to feed_item.user.name, feed_item.user %&gt;
+    &lt;/span&gt;
+    &lt;span class="content"&gt;&lt;%= feed_item.content %&gt;&lt;/span&gt;
+    &lt;span class="timestamp"&gt;
+      Posted &lt;%= time_ago_in_words(feed_item.created_at) %&gt; ago.
+    &lt;/span&gt;
+  &lt;% if current_user?(feed_item.user) %&gt;
+    &lt;%= link_to "delete", feed_item, method: :delete,
+                                     data: { confirm: "You sure?" },
+                                     title: feed_item.content %&gt;
+  &lt;% end %&gt;
+&lt;/li&gt;
+</code></pre><p>以下の様に、<br><code>&lt;% if pt &lt; newd then %&gt;
+      New
+&lt;% end %&gt;</code><br>を挿入した箇所に『New』の文字が追加されます。</p><p><%= image_tag"3_1_001.png", :alt => "newサンプル" %></p>
+  </div>

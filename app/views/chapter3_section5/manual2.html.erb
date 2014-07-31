@@ -1,0 +1,224 @@
+  <div class="span4">
+    <%= render 'layouts/navbar3' %>
+  </div>
+  <div class="span8">
+  	<h1 id="お問い合わせフォーム設置"><a name="お問い合わせフォーム設置" href="#お問い合わせフォーム設置"></a>お問い合わせフォーム設置</h1><hr class="page"><h3 id="1.メール送信設定"><a name="1.メール送信設定" href="#1.メール送信設定"></a>1.メール送信設定</h3><p>メール送信機能で追加したメーラー設定を、再度確認しましょう。</p><p>【config/environments/development.rb】<br>【config/environments/test.rb】<br>※メールアドレスとパスワードは、なるべくサブのものを用意して使用しましょう。</p><pre><code class="ruby hljs" data-origin="&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;config.action_mailer.delivery_method = :smtp
+config.action_mailer.raise_delivery_errors = true
+config.action_mailer.smtp_settings = {
+  :enable_starttls_auto =&amp;gt; true,
+  :address =&amp;gt; 'smtp.gmail.com',
+  :port =&amp;gt; '587',
+  :domain =&amp;gt; 'smtp.gmail.com',
+  :authentication =&amp;gt; 'plain',
+  :user_name =&amp;gt; 'ユーザー名@gmail.com',
+  :password =&amp;gt; 'gmailパスワード'
+  }
+&lt;/code&gt;&lt;/pre&gt;">config.action_mailer.delivery_method = <span class="hljs-symbol">:smtp</span>
+config.action_mailer.raise_delivery_errors = <span class="hljs-keyword">true</span>
+config.action_mailer.smtp_settings = {
+  <span class="hljs-symbol">:enable_starttls_auto</span> =&gt; <span class="hljs-keyword">true</span>,
+  <span class="hljs-symbol">:address</span> =&gt; <span class="hljs-string">'smtp.gmail.com'</span>,
+  <span class="hljs-symbol">:port</span> =&gt; <span class="hljs-string">'587'</span>,
+  <span class="hljs-symbol">:domain</span> =&gt; <span class="hljs-string">'smtp.gmail.com'</span>,
+  <span class="hljs-symbol">:authentication</span> =&gt; <span class="hljs-string">'plain'</span>,
+  <span class="hljs-symbol">:user_name</span> =&gt; <span class="hljs-string">'ユーザー名@gmail.com'</span>,
+  <span class="hljs-symbol">:password</span> =&gt; <span class="hljs-string">'gmailパスワード'</span>
+  }
+</code></pre><h3 id="2.attr_accessibleをrails4で使えるようにgemをインストール"><a name="2.attr_accessibleをrails4で使えるようにgemをインストール" href="#2.attr_accessibleをrails4で使えるようにgemをインストール"></a>2.attr_accessibleをRails4で使えるようにgemをインストール</h3><h4 id="2-1.gemfileに「protected_attributes」を記述する"><a name="2-1.gemfileに「protected_attributes」を記述する" href="#2-1.gemfileに「protected_attributes」を記述する"></a>2-1.Gemfileに「protected_attributes」を記述する</h4><pre><code class="ruby hljs" data-origin="&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;gem 'protected_attributes'
+&lt;/code&gt;&lt;/pre&gt;">gem <span class="hljs-string">'protected_attributes'</span>
+</code></pre><h4 id="2-2.bundle-installを行う"><a name="2-2.bundle-installを行う" href="#2-2.bundle-installを行う"></a>2-2.bundle installを行う</h4><pre><code class="ruby hljs" data-origin="&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;$ bundle install
+&lt;/code&gt;&lt;/pre&gt;"><span class="hljs-variable">$ </span>bundle install
+</code></pre><h4 id="2-3.micropostモデルにattr_accessibleを追加"><a name="2-3.micropostモデルにattr_accessibleを追加" href="#2-3.micropostモデルにattr_accessibleを追加"></a>2-3.micropostモデルにattr_accessibleを追加</h4><p>【app/models/micropost.rb】<br>protected_attributesをインストールすると、micropostがうまく投稿されなくなるので、<br>micropostモデルに「attr_accessible」を追加します。</p><pre><code class="ruby hljs" data-origin="&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;attr_accessible :content, :avatar
+&lt;/code&gt;&lt;/pre&gt;">attr_accessible <span class="hljs-symbol">:content</span>, <span class="hljs-symbol">:avatar</span>
+</code></pre><h3 id="3.フォーム用のモデルの作成"><a name="3.フォーム用のモデルの作成" href="#3.フォーム用のモデルの作成"></a>3.フォーム用のモデルの作成</h3><h4 id="3-1.messageというモデルを作成する"><a name="3-1.messageというモデルを作成する" href="#3-1.messageというモデルを作成する"></a>3-1.messageというモデルを作成する</h4><pre><code class="ruby hljs" data-origin="&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;$ rails g model message
+&lt;/code&gt;&lt;/pre&gt;"><span class="hljs-variable">$ </span>rails g model message
+</code></pre><h4 id="3-2.マイグレーションファイルを編集する"><a name="3-2.マイグレーションファイルを編集する" href="#3-2.マイグレーションファイルを編集する"></a>3-2.マイグレーションファイルを編集する</h4><p>名前（name）、メールアドレス（Email）、問い合わせ内容（Content）を保存するものを作成します。</p><pre><code class="ruby hljs" data-origin="&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;class CreateMessages &amp;lt; ActiveRecord::Migration
+  def self.up
+    create_table :messages do |t|
+      t.string :name, :null =&amp;gt; false
+      t.string :email, :null =&amp;gt; false
+      t.text     :content, :null =&amp;gt; false
+    end
+  end
+
+  def self.down
+    drop_table :messages
+  end
+end
+&lt;/code&gt;&lt;/pre&gt;"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">CreateMessages</span> <span class="hljs-inheritance">&lt; <span class="hljs-parent">ActiveRecord::Migration</span></span></span>
+  <span class="hljs-function"><span class="hljs-keyword">def</span> </span><span class="hljs-keyword">self</span>.up
+    create_table <span class="hljs-symbol">:messages</span> <span class="hljs-keyword">do</span> |t|
+      t.string <span class="hljs-symbol">:name</span>, <span class="hljs-symbol">:null</span> =&gt; <span class="hljs-keyword">false</span>
+      t.string <span class="hljs-symbol">:email</span>, <span class="hljs-symbol">:null</span> =&gt; <span class="hljs-keyword">false</span>
+      t.text     <span class="hljs-symbol">:content</span>, <span class="hljs-symbol">:null</span> =&gt; <span class="hljs-keyword">false</span>
+    <span class="hljs-keyword">end</span>
+  <span class="hljs-keyword">end</span>
+
+  <span class="hljs-function"><span class="hljs-keyword">def</span> </span><span class="hljs-keyword">self</span>.down
+    drop_table <span class="hljs-symbol">:messages</span>
+  <span class="hljs-keyword">end</span>
+<span class="hljs-keyword">end</span>
+</code></pre><h4 id="3-3.マイグレーションを実行します"><a name="3-3.マイグレーションを実行します" href="#3-3.マイグレーションを実行します"></a>3-3.マイグレーションを実行します</h4><pre><code class="ruby hljs" data-origin="&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;$ rake db:migrate
+&lt;/code&gt;&lt;/pre&gt;"><span class="hljs-variable">$ </span>rake <span class="hljs-symbol">db:</span>migrate
+</code></pre><h3 id="4.メーラーの作成"><a name="4.メーラーの作成" href="#4.メーラーの作成"></a>4.メーラーの作成</h3><h4 id="4-1.messageというメーラーとsentというメソッドをを作成します。"><a name="4-1.messageというメーラーとsentというメソッドをを作成します。" href="#4-1.messageというメーラーとsentというメソッドをを作成します。"></a>4-1.messageというメーラーとsentというメソッドをを作成します。</h4><pre><code class="ruby hljs" data-origin="&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;$ rails g mailer MessageMailer sent
+&lt;/code&gt;&lt;/pre&gt;"><span class="hljs-variable">$ </span>rails g mailer <span class="hljs-constant">MessageMailer</span> sent
+</code></pre><h4 id="4-2.メーラーの中身を編集します。"><a name="4-2.メーラーの中身を編集します。" href="#4-2.メーラーの中身を編集します。"></a>4-2.メーラーの中身を編集します。</h4><p>【app/mailers/message_mailer.rb】<br>【送信元メールアドレス】には送信元となるメールアドレスを設定<br>【送信先メールアドレス】にはメールを受け取りたいアドレスを設定</p><pre><code class="ruby hljs" data-origin="&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;# coding: utf-8
+
+class MessageMailer &amp;lt; ActionMailer::Base
+  default from: &quot;【送信元メールアドレス】&quot;
+  def sent(message)
+    @message = message
+    mail(:to =&amp;gt; &quot;【送信先メールアドレス】&quot;, :from =&amp;gt; @message.email, :subject =&amp;gt; 'フォームからのお問い合わせ')
+  end
+end
+&lt;/code&gt;&lt;/pre&gt;"><span class="hljs-comment"># coding: utf-8</span>
+
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MessageMailer</span> <span class="hljs-inheritance">&lt; <span class="hljs-parent">ActionMailer::Base</span></span></span>
+  default <span class="hljs-symbol">from:</span> <span class="hljs-string">"【送信元メールアドレス】"</span>
+  <span class="hljs-function"><span class="hljs-keyword">def</span> </span>sent(message)
+    <span class="hljs-variable">@message</span> = message
+    mail(<span class="hljs-symbol">:to</span> =&gt; <span class="hljs-string">"【送信先メールアドレス】"</span>, <span class="hljs-symbol">:from</span> =&gt; <span class="hljs-variable">@message</span>.email, <span class="hljs-symbol">:subject</span> =&gt; <span class="hljs-string">'フォームからのお問い合わせ'</span>)
+  <span class="hljs-keyword">end</span>
+<span class="hljs-keyword">end</span>
+</code></pre><h3 id="5.メーラーのviewの作成"><a name="5.メーラーのviewの作成" href="#5.メーラーのviewの作成"></a>5.メーラーのviewの作成</h3><p>送信されるメールの内容を作成します。<br>【app/views/message_mailer/sent.txt.erb】</p><pre><code class="ruby hljs" data-origin="&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;以下の内容でお問い合わせ頂きました。
+お名前
+&amp;lt;%= @message.name %&amp;gt;
+
+メールアドレス
+&amp;lt;%= @message.email %&amp;gt;
+
+お問い合わせ内容
+&amp;lt;%= @message.content %&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;">以下の内容でお問い合わせ頂きました。
+お名前
+&lt;%= <span class="hljs-variable">@message</span>.name %&gt;
+
+メールアドレス
+&lt;%= <span class="hljs-variable">@message</span>.email %&gt;
+
+お問い合わせ内容
+&lt;%= <span class="hljs-variable">@message</span>.content %&gt;
+</code></pre><h3 id="6.コントローラーの設定"><a name="6.コントローラーの設定" href="#6.コントローラーの設定"></a>6.コントローラーの設定</h3><p>メールを送信するメソッドを設定するコントローラーを作成します。<br>【app/controllers/message_controller.rb】</p><pre><code class="ruby hljs" data-origin="&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;# coding: utf-8
+
+class MessageController &amp;lt; ApplicationController
+
+  def new
+    @message = Message.new
+  end
+
+  def create
+    @message = Message.new(params[:message])
+    if @message.save
+      MessageMailer.sent(@message).deliver
+      redirect_to :action =&amp;gt; :index, :notice =&amp;gt; 'お問い合わせありがとうございました。'
+    else
+      render :action =&amp;gt; :index, :alert =&amp;gt; 'お問い合わせに不備があります。'
+    end
+  end
+
+  def index
+    @notice = params[:notice]
+  end
+
+end
+&lt;/code&gt;&lt;/pre&gt;"><span class="hljs-comment"># coding: utf-8</span>
+
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MessageController</span> <span class="hljs-inheritance">&lt; <span class="hljs-parent">ApplicationController</span></span></span>
+
+  <span class="hljs-function"><span class="hljs-keyword">def</span> </span>new
+    <span class="hljs-variable">@message</span> = <span class="hljs-constant">Message</span>.new
+  <span class="hljs-keyword">end</span>
+
+  <span class="hljs-function"><span class="hljs-keyword">def</span> </span>create
+    <span class="hljs-variable">@message</span> = <span class="hljs-constant">Message</span>.new(params[<span class="hljs-symbol">:message</span>])
+    <span class="hljs-keyword">if</span> <span class="hljs-variable">@message</span>.save
+      <span class="hljs-constant">MessageMailer</span>.sent(<span class="hljs-variable">@message</span>).deliver
+      redirect_to <span class="hljs-symbol">:action</span> =&gt; <span class="hljs-symbol">:index</span>, <span class="hljs-symbol">:notice</span> =&gt; <span class="hljs-string">'お問い合わせありがとうございました。'</span>
+    <span class="hljs-keyword">else</span>
+      render <span class="hljs-symbol">:action</span> =&gt; <span class="hljs-symbol">:index</span>, <span class="hljs-symbol">:alert</span> =&gt; <span class="hljs-string">'お問い合わせに不備があります。'</span>
+    <span class="hljs-keyword">end</span>
+  <span class="hljs-keyword">end</span>
+
+  <span class="hljs-function"><span class="hljs-keyword">def</span> </span>index
+    <span class="hljs-variable">@notice</span> = params[<span class="hljs-symbol">:notice</span>]
+  <span class="hljs-keyword">end</span>
+
+<span class="hljs-keyword">end</span>
+</code></pre><h3 id="7.モデルを設定します"><a name="7.モデルを設定します" href="#7.モデルを設定します"></a>7.モデルを設定します</h3><p>【app/models/message.rb】</p><pre><code class="ruby hljs" data-origin="&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;class Message &amp;lt; ActiveRecord::Base
+  attr_accessible :name, :email, :content
+end
+&lt;/code&gt;&lt;/pre&gt;"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Message</span> <span class="hljs-inheritance">&lt; <span class="hljs-parent">ActiveRecord::Base</span></span></span>
+  attr_accessible <span class="hljs-symbol">:name</span>, <span class="hljs-symbol">:email</span>, <span class="hljs-symbol">:content</span>
+<span class="hljs-keyword">end</span>
+</code></pre><h3 id="8.viewを設定します"><a name="8.viewを設定します" href="#8.viewを設定します"></a>8.Viewを設定します</h3><p>【app/views/message/index.html.erb】</p><pre><code class="ruby hljs" data-origin="&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;&amp;lt;h1&amp;gt;お問い合わせフォーム完了&amp;lt;/h1&amp;gt;
+
+&amp;lt;%= @notice %&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;">&lt;h1&gt;お問い合わせフォーム完了&lt;/h1&gt;
+
+&lt;%= @notice %&gt;
+</code></pre><hr class="underscore"><p>【app/views/message/new.html.erb】</p><pre><code data-origin="&lt;pre&gt;&lt;code&gt;&amp;lt;h1&amp;gt;Contact&amp;lt;/h1&amp;gt;
+
+&amp;lt;%= form_for @message, :url =&amp;gt; message_path do |form| %&amp;gt;
+
+&amp;lt;table border=&quot;0&quot; cellpadding=&quot;0&quot; cellspacing=&quot;0&quot; class=&quot;post&quot;&amp;gt;
+
+&amp;lt;tr&amp;gt;
+  &amp;lt;th&amp;gt;&amp;lt;%= form.label :name %&amp;gt;&amp;lt;/th&amp;gt;
+  &amp;lt;td&amp;gt;&amp;lt;%= form.text_field :name %&amp;gt;&amp;lt;/td&amp;gt;
+&amp;lt;/tr&amp;gt;
+
+&amp;lt;tr&amp;gt;
+  &amp;lt;th&amp;gt;&amp;lt;%= form.label :email %&amp;gt;&amp;lt;/th&amp;gt;
+  &amp;lt;td&amp;gt;&amp;lt;%= form.text_field :email %&amp;gt;&amp;lt;/td&amp;gt;
+&amp;lt;/tr&amp;gt;
+
+&amp;lt;tr&amp;gt;
+  &amp;lt;th&amp;gt;&amp;lt;%= form.label :content %&amp;gt;&amp;lt;/th&amp;gt;
+  &amp;lt;td&amp;gt;&amp;lt;%= form.text_area :content %&amp;gt;&amp;lt;/td&amp;gt;
+&amp;lt;/tr&amp;gt;
+
+&amp;lt;/table&amp;gt;
+
+&amp;lt;div class=&quot;actions&quot;&amp;gt;
+    &amp;lt;%= form.submit &quot;メール送信&quot; %&amp;gt;
+&amp;lt;/div&amp;gt;
+
+&amp;lt;% end %&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;">&lt;h1&gt;Contact&lt;/h1&gt;
+
+&lt;%= form_for @message, :url =&gt; message_path do |form| %&gt;
+
+&lt;table border="0" cellpadding="0" cellspacing="0" class="post"&gt;
+
+&lt;tr&gt;
+  &lt;th&gt;&lt;%= form.label :name %&gt;&lt;/th&gt;
+  &lt;td&gt;&lt;%= form.text_field :name %&gt;&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+  &lt;th&gt;&lt;%= form.label :email %&gt;&lt;/th&gt;
+  &lt;td&gt;&lt;%= form.text_field :email %&gt;&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+  &lt;th&gt;&lt;%= form.label :content %&gt;&lt;/th&gt;
+  &lt;td&gt;&lt;%= form.text_area :content %&gt;&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;/table&gt;
+
+&lt;div class="actions"&gt;
+    &lt;%= form.submit "メール送信" %&gt;
+&lt;/div&gt;
+
+&lt;% end %&gt;
+</code></pre><h3 id="9.ルーティング設定を設定します"><a name="9.ルーティング設定を設定します" href="#9.ルーティング設定を設定します"></a>9.ルーティング設定を設定します</h3><p>【config/routes.rb】</p><pre><code class="ruby hljs" data-origin="&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;  resources :messages, only: [:new, :create]
+  match '/message', to: 'message#new', via: 'get'
+  match '/message', to: 'message#create', via: 'post'
+  match '/message:notice', to: 'message#index', via: 'get'
+&lt;/code&gt;&lt;/pre&gt;">  resources <span class="hljs-symbol">:messages</span>, <span class="hljs-symbol">only:</span> [<span class="hljs-symbol">:new</span>, <span class="hljs-symbol">:create</span>]
+  match <span class="hljs-string">'/message'</span>, <span class="hljs-symbol">to:</span> <span class="hljs-string">'message#new'</span>, <span class="hljs-symbol">via:</span> <span class="hljs-string">'get'</span>
+  match <span class="hljs-string">'/message'</span>, <span class="hljs-symbol">to:</span> <span class="hljs-string">'message#create'</span>, <span class="hljs-symbol">via:</span> <span class="hljs-string">'post'</span>
+  match <span class="hljs-string">'/message:notice'</span>, <span class="hljs-symbol">to:</span> <span class="hljs-string">'message#index'</span>, <span class="hljs-symbol">via:</span> <span class="hljs-string">'get'</span>
+</code></pre><h3 id="10.メールが送信されたかを確認する"><a name="10.メールが送信されたかを確認する" href="#10.メールが送信されたかを確認する"></a>10.メールが送信されたかを確認する</h3><p>下記フォームより実際に送信してみましょう。</p><p><a href="http://localhost:3000/message"></a><a href="http://localhost:3000/message">http://localhost:3000/message</a></p><p>設定したアドレスにメールが来ていれば設置完了です。</p>
+  </div>

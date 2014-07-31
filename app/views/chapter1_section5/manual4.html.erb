@@ -1,0 +1,48 @@
+  <div class="span4">
+    <%= render 'layouts/navbar' %>
+  </div>
+  <div class="span8">
+  	<h1 id="githubとの連携"><a name="githubとの連携" href="#githubとの連携"></a>Githubとの連携</h1><hr class="page"><h3 id="3-1.github用sshキーの作成"><a name="3-1.github用sshキーの作成" href="#3-1.github用sshキーの作成"></a>3-1.Github用sshキーの作成</h3><p>ローカルからWebサービス側のサーバーに接続するときは、暗号化されたパスワードが必要となります。これがSSHキーと呼ばれる鍵です。</p><hr class="section"><h3 id="ssh-keygenを実行"><a name="ssh-keygenを実行" href="#ssh-keygenを実行"></a>ssh-keygenを実行</h3><pre><code class="ruby hljs" data-origin="&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;$ cd
+$ ssh-keygen
+&lt;/code&gt;&lt;/pre&gt;"><span class="hljs-variable">$ </span>cd
+<span class="hljs-variable">$ </span>ssh-keygen
+</code></pre><h3 id="sshキーを作る場所を設定"><a name="sshキーを作る場所を設定" href="#sshキーを作る場所を設定"></a>sshキーを作る場所を設定</h3><pre><code class="ruby hljs" data-origin="&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;$ ssh-keygen
+&lt;/code&gt;&lt;/pre&gt;"><span class="hljs-variable">$ </span>ssh-keygen
+</code></pre><p>これから生成する鍵（鍵といっても、単なるファイルになります）を置く場所を尋ねてきています。<br>基本的にはここはなにも打たずにEnterで問題ありません。</p><pre><code class="ruby hljs" data-origin="&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;Generating public/private rsa key pair.
+
+Enter file in which to save the key (/Users/○○○○○○/.ssh/id_rsa):
+&lt;/code&gt;&lt;/pre&gt;"><span class="hljs-constant">Generating</span> public/private rsa key pair.
+
+<span class="hljs-constant">Enter</span> file <span class="hljs-keyword">in</span> which to save the key (<span class="hljs-regexp">/Users/</span>○○○○○○/.ssh/id_rsa)<span class="hljs-symbol">:</span>
+</code></pre><h3 id="パスフレーズを設定"><a name="パスフレーズを設定" href="#パスフレーズを設定"></a>パスフレーズを設定</h3><p>下記のコメントが現れたら、sshキーに設定するパスフレーズ（鍵ですが、鍵自体にもパスワードを掛けます）を設定します。<br>キーボードを打っても表示されませんが、入力されているので間違えないようにしましょう。<br>確認のため、もう一度入力を求められますが、同じパスを入力してください。</p><pre><code class="ruby hljs" data-origin="&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;Enter passphrase (empty for no passphrase):
+Enter same passphrase again:
+&lt;/code&gt;&lt;/pre&gt;"><span class="hljs-constant">Enter</span> passphrase (empty <span class="hljs-keyword">for</span> no passphrase)<span class="hljs-symbol">:</span>
+<span class="hljs-constant">Enter</span> same passphrase <span class="hljs-symbol">again:</span>
+</code></pre><h3 id="sshキーが作成されたか確認"><a name="sshキーが作成されたか確認" href="#sshキーが作成されたか確認"></a>sshキーが作成されたか確認</h3><p>成功すると下記のように表示されます。</p><pre><code class="ruby hljs" data-origin="&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;Your identification has been saved in /Users/○○○○○○/.ssh/id_rsa.
+
+Your public key has been saved in /Users/○○○○○○/.ssh/id_rsa.pub.
+
+The key fingerprint is:
+66:d6:9c:20:70:ae:6d:2b:6d:bb:d9:8e:ac:cf:24:16 ○○○○○○@mymachine
+
+The key's randomart image is:
+（中略）
+&lt;/code&gt;&lt;/pre&gt;"><span class="hljs-constant">Your</span> identification has been saved <span class="hljs-keyword">in</span> /<span class="hljs-constant">Users</span>/○○○○○○/.ssh/id_rsa.
+
+<span class="hljs-constant">Your</span> public key has been saved <span class="hljs-keyword">in</span> /<span class="hljs-constant">Users</span>/○○○○○○/.ssh/id_rsa.pub.
+
+<span class="hljs-constant">The</span> key fingerprint <span class="hljs-symbol">is:</span>
+<span class="hljs-number">66</span><span class="hljs-symbol">:d6</span><span class="hljs-symbol">:</span><span class="hljs-number">9</span><span class="hljs-symbol">c:</span><span class="hljs-number">20</span><span class="hljs-symbol">:</span><span class="hljs-number">70</span><span class="hljs-symbol">:ae</span><span class="hljs-symbol">:</span><span class="hljs-number">6</span><span class="hljs-symbol">d:</span><span class="hljs-number">2</span><span class="hljs-symbol">b:</span><span class="hljs-number">6</span><span class="hljs-symbol">d:</span><span class="hljs-symbol">bb:</span><span class="hljs-symbol">d9:</span><span class="hljs-number">8</span><span class="hljs-symbol">e:</span><span class="hljs-symbol">ac:</span><span class="hljs-symbol">cf:</span><span class="hljs-number">24</span><span class="hljs-symbol">:</span><span class="hljs-number">16</span> ○○○○○○<span class="hljs-variable">@mymachine</span>
+
+<span class="hljs-constant">The</span> key<span class="hljs-string">'s randomart image is:
+（中略）
+</span></code></pre><p>そして、実際にsshキーが作成されたかlsコマンドで確認しましょう。<br>この中に「id_rsa」という秘密鍵と「id_rsa.pub」という公開鍵があれば確認完了となります。</p><pre><code class="ruby hljs" data-origin="&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;$ ls /Users/ご自身のホームディレクトリ名/.ssh/
+&lt;/code&gt;&lt;/pre&gt;"><span class="hljs-variable">$ </span>ls /<span class="hljs-constant">Users</span>/ご自身のホームディレクトリ名/.ssh/
+</code></pre><hr class="section"><h3 id="3-2.sshキーを設定する"><a name="3-2.sshキーを設定する" href="#3-2.sshキーを設定する"></a>3-2.sshキーを設定する</h3><p>ご自身のPCにて作成したsshキーをGithubに登録します。<br>設定することで、制作中のRailsプロジェクトをGithubにて管理することができるようになります。</p><hr class="section"><h3 id="sshキー（公開鍵）を表示する"><a name="sshキー（公開鍵）を表示する" href="#sshキー（公開鍵）を表示する"></a>sshキー（公開鍵）を表示する</h3><p>Githubに登録するためにsshキーの暗号を表示させます。</p><pre><code class="ruby hljs" data-origin="&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;$ cat ~/.ssh/id_rsa.pub
+&lt;/code&gt;&lt;/pre&gt;"><span class="hljs-variable">$ </span>cat ~<span class="hljs-regexp">/.ssh/id</span>_rsa.pub
+</code></pre><p>そして、表示された部分（ssh-rsa…中略…○○○@○○○）をコピーしてください。</p><pre><code class="ruby hljs" data-origin="&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;ssh-rsa cMQCf+vupwjfeddxc4$Tgd12aehe
+・・・（　中略　）・・・ FAi2Se/7WFO29qhl5I5/dihceSw4j ○○○○○○@mymachine
+&lt;/code&gt;&lt;/pre&gt;">ssh-rsa cMQCf+vupwjfeddxc4<span class="hljs-variable">$Tgd12aehe</span>
+・・・（　中略　）・・・ <span class="hljs-constant">FAi2Se</span>/<span class="hljs-number">7</span>WFO29qhl5I5/dihceSw4j ○○○○○○<span class="hljs-variable">@mymachine</span>
+</code></pre><h3 id="githubに公開鍵を登録"><a name="githubに公開鍵を登録" href="#githubに公開鍵を登録"></a>Githubに公開鍵を登録</h3><p>githubのログインページに戻り、右上にある設定ボタンを押します。<br>そして、左側のサイドバーから「SSH Keys」を選択し、「Add SSH key」をクリックします。</p><p><%= image_tag"1_5_003.png", :alt => "Github登録" %></p><p>「Add SSH key」をクリックするとタイトルとキーを入力する場所が表示されます。<br>「Title」の部分にはテキトーな名前（ex.日付、Railsプロジェクト名など）を入力し、「Key」の部分に先ほどコピーした公開鍵の暗号をペーストし、「Add key」をクリック。</p><p>作成後、上部に「Title (12:34:・・・)」のように表示されれば完了です。</p>
+  </div>

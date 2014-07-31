@@ -1,0 +1,12 @@
+  <div class="span4">
+    <%= render 'layouts/navbar' %>
+  </div>
+  <div class="span8">
+  	<h1 id="githubにpush"><a name="githubにpush" href="#githubにpush"></a>Githubにpush</h1><hr class="page"><h2 id="github上に新しいリポジトリ（フォルダを管理する場所）を作成する"><a name="github上に新しいリポジトリ（フォルダを管理する場所）を作成する" href="#github上に新しいリポジトリ（フォルダを管理する場所）を作成する"></a>github上に新しいリポジトリ（フォルダを管理する場所）を作成する</h2><p>ログインページ右にある「New repository」を押し、必要な情報を入力すると作成されます。</p><p><%= image_tag"1_7_002.png", :alt => "rails_test" %></p><hr class="section"><h3 id="接続先のリポジトリを指定する"><a name="接続先のリポジトリを指定する" href="#接続先のリポジトリを指定する"></a>接続先のリポジトリを指定する</h3><pre><code class="ruby hljs" data-origin="&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;$ git remote add origin git@github.com:[githubアカウント]/[リポジトリ名].git
+&lt;/code&gt;&lt;/pre&gt;"><span class="hljs-variable">$ </span>git remote add origin git<span class="hljs-variable">@github</span>.<span class="hljs-symbol">com:</span>[githubアカウント]/[リポジトリ名].git
+</code></pre><p>※章の最初にGithubで作成したリポジトリを指定します。<br>※Githubで設定したパスフレーズを聞かれる場合がありますので、入力してください。</p><hr class="section"><h3 id="githubのリポジトリをプル（受信）する"><a name="githubのリポジトリをプル（受信）する" href="#githubのリポジトリをプル（受信）する"></a>Githubのリポジトリをプル（受信）する</h3><p>この部分は必要な方と必要でない方がいますので、1度コマンドを打ってみてください。</p><pre><code class="ruby hljs" data-origin="&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;$ git pull origin master
+&lt;/code&gt;&lt;/pre&gt;"><span class="hljs-variable">$ </span>git pull origin master
+</code></pre><hr class="section"><h3 id="githubのリポジトリにコミットした内容をプッシュ（送信）する"><a name="githubのリポジトリにコミットした内容をプッシュ（送信）する" href="#githubのリポジトリにコミットした内容をプッシュ（送信）する"></a>Githubのリポジトリにコミットした内容をプッシュ（送信）する</h3><pre><code class="ruby hljs" data-origin="&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;$ git push -u origin master
+&lt;/code&gt;&lt;/pre&gt;"><span class="hljs-variable">$ </span>git push -u origin master
+</code></pre><p><%= image_tag"1_7_003.png", :alt => "rails_test" %></p><hr class="section"><h3 id="ブラウザでgithubを確認"><a name="ブラウザでgithubを確認" href="#ブラウザでgithubを確認"></a>ブラウザでgithubを確認</h3><p>ローカルのリポジトリ（Scaffoldで作成したフォルダ）がそのままGithubで見られるようになっていれば確認完了です。<br>※下記参考サイトのようにファイルが見れるようになっていれば完了です。<br><a href="https://github.com/yoshialiens/project01">https://github.com/yoshialiens/project01</a></p><hr class="section"><p><a href="http://railstutorial.jp/chapters/beginning?version=4.0#sec-github">railstutorial　GitHub</a></p><p><a href="http://railstutorial.jp/chapters/beginning?version=4.0#sec-git_commands">railstutorial　ブランチ (branch)、変更 (edit)、 コミット (commit)、マージ (merge)</a></p>
+  </div>

@@ -1,0 +1,18 @@
+  <div class="span4">
+    <%= render 'layouts/navbar4' %>
+  </div>
+  <div class="span8">
+  	<h1 id="db設計書の作成"><a name="db設計書の作成" href="#db設計書の作成"></a>DB設計書の作成</h1><hr class="page"><p>データベースの設計が完了したらDB設計書を作成します。<br>前セクションで設計したデータベースをドキュメントにまとめたものになります。</p><p>ブログシステムを例にしてみます。</p><hr class="section"><p>【テーブル1】投稿内容　テーブル名【post】  </p><hr class="section"><ul>
+<li>ID【id】（integer） </li>
+<li>タイトル【post_title】（string） </li>
+<li>投稿内容【post】 （string）</li>
+<li>登録日時【created_at】（datetime)</li>
+<li>更新日時【updated_at】（datetime)</li>
+</ul><hr class="section"><p>【テーブル2】コメント内容　テーブル名【comment】  </p><hr class="section"><ul>
+<li>ID【id】 </li>
+<li>コメント者【commentter】 （string）</li>
+<li>コメント内容【comment】 （string）</li>
+<li>登録日時【created_at】（datetime)</li>
+<li>更新日時【updated_at】（datetime)</li>
+</ul><hr class="section"><p>以下の参考資料をもとに設計書を作成してみましょう。</p><h3 id="参考資料"><a name="参考資料" href="#参考資料"></a>参考資料</h3><hr class="section"><p><%= image_tag"4_4_004.png", :alt => "4_4_004.png" %></p><p><%= image_tag"4_4_005.png", :alt => "4_4_005.png" %></p><hr class="section"><p>以上でデータベース設計は完了です。</p>
+  </div>

@@ -1,0 +1,52 @@
+  <div class="span4">
+    <%= render 'layouts/navbar3' %>
+  </div>
+  <div class="span8">
+  	<h1 id="ccに送信先と別アドレスを設定する"><a name="ccに送信先と別アドレスを設定する" href="#ccに送信先と別アドレスを設定する"></a>ccに送信先と別アドレスを設定する</h1><hr class="page"><p>【app/mailers/micropostsendmail.rb】に以下を追加します。</p><pre><code class="ruby hljs" data-origin="&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;# coding: utf-8
+
+class Micropostsendmail &amp;lt; ActionMailer::Base
+  default from: &quot;【送信元メールアドレス】&quot;
+
+  # Subject can be set in your I18n file at config/locales/en.yml
+  # with the following lookup:
+  #
+  #   en.test_mailer.sendmail.subject
+  #
+
+  def sendmail(micropost)
+    @micropost = micropost
+
+    mail(:to =&amp;gt; &quot;【送信先メールアドレス】&quot;,
+   :cc =&amp;gt; &quot;【CC送信先メールアドレス】&quot;,
+   :subject =&amp;gt; 'コメントが追加されました')
+  end
+end
+&lt;/code&gt;&lt;/pre&gt;"><span class="hljs-comment"># coding: utf-8</span>
+
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Micropostsendmail</span> <span class="hljs-inheritance">&lt; <span class="hljs-parent">ActionMailer::Base</span></span></span>
+  default <span class="hljs-symbol">from:</span> <span class="hljs-string">"【送信元メールアドレス】"</span>
+
+  <span class="hljs-comment"># Subject can be set in your I18n file at config/locales/en.yml</span>
+  <span class="hljs-comment"># with the following lookup:</span>
+  <span class="hljs-comment">#</span>
+  <span class="hljs-comment">#   en.test_mailer.sendmail.subject</span>
+  <span class="hljs-comment">#</span>
+
+  <span class="hljs-function"><span class="hljs-keyword">def</span> </span>sendmail(micropost)
+    <span class="hljs-variable">@micropost</span> = micropost
+
+    mail(<span class="hljs-symbol">:to</span> =&gt; <span class="hljs-string">"【送信先メールアドレス】"</span>,
+   <span class="hljs-symbol">:cc</span> =&gt; <span class="hljs-string">"【CC送信先メールアドレス】"</span>,
+   <span class="hljs-symbol">:subject</span> =&gt; <span class="hljs-string">'コメントが追加されました'</span>)
+  <span class="hljs-keyword">end</span>
+<span class="hljs-keyword">end</span>
+</code></pre><p>BCCを設定したい場合は、以下のように追加しましょう。</p><pre><code class="ruby hljs" data-origin="&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;    mail(:to =&amp;gt; &quot;【送信先メールアドレス】&quot;,
+   :cc =&amp;gt; &quot;【CC送信先メールアドレス】&quot;,
+   :bcc =&amp;gt; &quot;【BCC送信先メールアドレス】&quot;,
+   :subject =&amp;gt; 'コメントが追加されました')
+&lt;/code&gt;&lt;/pre&gt;">    mail(<span class="hljs-symbol">:to</span> =&gt; <span class="hljs-string">"【送信先メールアドレス】"</span>,
+   <span class="hljs-symbol">:cc</span> =&gt; <span class="hljs-string">"【CC送信先メールアドレス】"</span>,
+   <span class="hljs-symbol">:bcc</span> =&gt; <span class="hljs-string">"【BCC送信先メールアドレス】"</span>,
+   <span class="hljs-symbol">:subject</span> =&gt; <span class="hljs-string">'コメントが追加されました'</span>)
+</code></pre><p>追加後は再度、local環境で実際に投稿をして、設定アドレスに送信されているか確認してください。</p>
+  </div>

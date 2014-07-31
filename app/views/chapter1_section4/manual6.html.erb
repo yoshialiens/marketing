@@ -1,0 +1,32 @@
+  <div class="span4">
+    <%= render 'layouts/navbar' %>
+  </div>
+  <div class="span8">
+  	<h1 id="rubyのバージョンを揃える"><a name="rubyのバージョンを揃える" href="#rubyのバージョンを揃える"></a>rubyのバージョンを揃える</h1><hr class="page"><h3 id="1.rubyをインストール（今回は2.0.0-p353）"><a name="1.rubyをインストール（今回は2.0.0-p353）" href="#1.rubyをインストール（今回は2.0.0-p353）"></a>1.rubyをインストール（今回は2.0.0-p353）</h3><pre><code class="ruby hljs" data-origin="&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;$ rbenv install 2.0.0-p353
+&lt;/code&gt;&lt;/pre&gt;"><span class="hljs-variable">$ </span>rbenv install <span class="hljs-number">2.0</span>.<span class="hljs-number">0</span>-p353
+</code></pre>
+<p>
+rbenvの使い方をもっと知りたい方は下記記事を参考にしてください。<br>
+<a href="http://blog.axross.org/entry/2013/12/19/221625" target="_blank">rbenvの使い方を簡単にまとめてみた</a><br>
+<a href="http://inokara.hateblo.jp/entry/2013/04/21/023840" target="_blank">rbenv を使って ruby 2 系 をインストール、ついでに rails4 までやってみる一部始終</a>
+</p>
+<h3 id="2.使用するrubyのバージョンを選択する"><a name="2.使用するrubyのバージョンを選択する" href="#2.使用するrubyのバージョンを選択する"></a>2.使用するrubyのバージョンを選択する</h3><p>複数のバージョンをインストールできるので、そのときに使うバージョンを選択する。</p><pre><code class="ruby hljs" data-origin="&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;$ rbenv global 2.0.0-p353
+&lt;/code&gt;&lt;/pre&gt;"><span class="hljs-variable">$ </span>rbenv global <span class="hljs-number">2.0</span>.<span class="hljs-number">0</span>-p353
+</code></pre><h3 id="3.設定されたrubyのバージョンを確認する"><a name="3.設定されたrubyのバージョンを確認する" href="#3.設定されたrubyのバージョンを確認する"></a>3.設定されたrubyのバージョンを確認する</h3><p>バージョンがかわらない場合はターミナルを再起動してください。</p><pre><code class="ruby hljs" data-origin="&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;$ ruby -v
+&lt;/code&gt;&lt;/pre&gt;"><span class="hljs-variable">$ </span>ruby -v
+</code></pre><h3 id="4.gemをアップデートする"><a name="4.gemをアップデートする" href="#4.gemをアップデートする"></a>4.gemをアップデートする</h3><pre><code class="ruby hljs" data-origin="&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;$ sudo gem update
+&lt;/code&gt;&lt;/pre&gt;"><span class="hljs-variable">$ </span>sudo gem update
+</code></pre><p>※今回、Rails4.0というバージョンで進めていきますが、<br>その際に、Rakeというシステムのバージョンを「10.x」系に合わせないと不都合が起こります。<br>gemアップデート後に必ず確認しましょう。</p><pre><code class="ruby hljs" data-origin="&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;$ rake --version
+
+rake, version 10.×.×
+&lt;/code&gt;&lt;/pre&gt;"><span class="hljs-variable">$ </span>rake --version
+
+rake, version <span class="hljs-number">10</span>.×.×
+</code></pre>
+<p>
+もしここでrakeのバージョンが10系でなかった場合は、下記コマンドでアップデートをしてください。
+<pre><code class="ruby hljs" data-origin="&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;$ sudo gem update
+&lt;/code&gt;&lt;/pre&gt;"><span class="hljs-variable">$ </span>gem rake update
+</code></pre>
+</p>
+  </div>

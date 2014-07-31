@@ -1,0 +1,10 @@
+  <div class="span4">
+    <%= render 'layouts/navbar3' %>
+  </div>
+  <div class="span8">
+  	<h1 id="画像のサイズを変更する"><a name="画像のサイズを変更する" href="#画像のサイズを変更する"></a>画像のサイズを変更する</h1><hr class="page"><p>アップロードする画像のサイズを変えましょう。</p><hr class="section"><h3 id="1.modelに定義した画像サイズを変更する"><a name="1.modelに定義した画像サイズを変更する" href="#1.modelに定義した画像サイズを変更する"></a>1.modelに定義した画像サイズを変更する</h3><p>【app/models/micropost.rb】 に定義した画像サイズを変更します。</p><pre><code class="ruby hljs" data-origin="&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;has_attached_file :avatar, styles: { medium: &quot;80x80&amp;gt;&quot;, thumb: &quot;50x50&amp;gt;&quot; }
+&lt;/code&gt;&lt;/pre&gt;">has_attached_file <span class="hljs-symbol">:avatar</span>, <span class="hljs-symbol">styles:</span> { <span class="hljs-symbol">medium:</span> <span class="hljs-string">"80x80&gt;"</span>, <span class="hljs-symbol">thumb:</span> <span class="hljs-string">"50x50&gt;"</span> }
+</code></pre><p>↓↓↓</p><pre><code class="ruby hljs" data-origin="&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;has_attached_file :avatar, styles: { medium: &quot;100x100&amp;gt;&quot;, thumb: &quot;70x70&amp;gt;&quot; }
+&lt;/code&gt;&lt;/pre&gt;">has_attached_file <span class="hljs-symbol">:avatar</span>, <span class="hljs-symbol">styles:</span> { <span class="hljs-symbol">medium:</span> <span class="hljs-string">"100x100&gt;"</span>, <span class="hljs-symbol">thumb:</span> <span class="hljs-string">"70x70&gt;"</span> }
+</code></pre><h3 id="2.画像をアップロードする"><a name="2.画像をアップロードする" href="#2.画像をアップロードする"></a>2.画像をアップロードする</h3><p>※変更前の画像は、以前のサイズで保存されているため、サイズが変わりません。</p>
+  </div>

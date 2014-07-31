@@ -1,0 +1,30 @@
+  <div class="span4">
+    <%= render 'layouts/navbar' %>
+  </div>
+  <div class="span8">
+  	  <h1 id="homebrewをセットアップ"><a name="homebrewをセットアップ" href="#homebrewをセットアップ"></a>homebrewをセットアップ</h1><hr class="page"><p>【<strong>homebrew（ホームブルー）</strong>】とは、<br>Macのオペレーティングシステム上でソフトウェアの導入を単純化するパッケージ管理システムのひとつです。</p><p>簡単に説明すると、<strong>homebrew</strong>を使うことによって、コマンド1つで必要なソフトをインストールできるようになります。</p><hr class="section"><h3 id="1.homebrewをインストールする"><a name="1.homebrewをインストールする" href="#1.homebrewをインストールする"></a>1.homebrewをインストールする</h3><p>※<a href="http://brew.sh/" target="_blank">Homebrew</a>公式サイトにインストールコマンドがあるので、<br>このコマンドをターミナル上にコピー＆ペーストしてエンターを押してください。</p><pre><code class="ruby hljs" data-origin="&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;$ ruby -e &quot;$(curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)&quot;
+&lt;/code&gt;&lt;/pre&gt;"><span class="hljs-variable">$ </span>ruby -e <span class="hljs-string">"$(curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)"</span>
+</code></pre><h3 id="2.brewに問題がないかチェック"><a name="2.brewに問題がないかチェック" href="#2.brewに問題がないかチェック"></a>2.brewに問題がないかチェック</h3><pre><code class="ruby hljs" data-origin="&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;$ brew doctor
+&lt;/code&gt;&lt;/pre&gt;"><span class="hljs-variable">$ </span>brew doctor
+</code></pre>
+<p>ここで環境の差によりErrorやWarningがでます。<br>吐出されるErrorやWarningによって対処方法が違ってきますので下記記事を参考にしてbrew doctorコマンドを通してください。<br>
+	<a href="http://bismar.hatenablog.com/entry/2012/12/06/022457" target="_blank">homebrew brew doctorトラブルシューティング</a><br>
+	上記記事は「brew doctor warning」で検索をかけて出てきました。<br>
+	もしこの記事に書かれていること以外のErrorやWarningがある場合は、同じような感じでワードを絞って検索してみてください。<br>
+</p>
+<p>
+	成功すると下記画像のようなコメントがでます。<br>
+	<%= image_tag"1_4_007.png", :alt => "brew doctor" %>
+</p>
+<p>上のリンクを参考に処理をする前に試しに一度下のbrew updateもしておきましょう。</p>
+<h3 id="3.brewをアップデートする"><a name="3.brewをアップデートする" href="#3.brewをアップデートする"></a>3.brewをアップデートする</h3><pre><code class="ruby hljs" data-origin="&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;$ brew update
+&lt;/code&gt;&lt;/pre&gt;"><span class="hljs-variable">$ </span>brew update
+</code></pre><h3 id="4.brewのバージョンをチェックする"><a name="4.brewのバージョンをチェックする" href="#4.brewのバージョンをチェックする"></a>4.brewのバージョンをチェックする</h3><p>※今後、Ruby・Ruby on Rails、gemなどをインストールしますが、それぞれのバージョンを揃えないと起動しない場合もあります。<br>なので、インストールしたソフトウェアのバージョンを確認した際は、バージョンをメモしておきましょう。</p><pre><code class="ruby hljs" data-origin="&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;$ brew -v
+&lt;/code&gt;&lt;/pre&gt;"><span class="hljs-variable">$ </span>brew -v
+</code></pre>
+<p>
+表示結果はこのような感じになります。<br>
+<%= image_tag"1_4_008.png", :alt => "brew update" %><br>
+今回はversionが0.9.5。
+</p>
+  </div>

@@ -1,0 +1,14 @@
+  <div class="span4">
+    <%= render 'layouts/navbar3' %>
+  </div>
+  <div class="span8">
+  	<h1 id="『new』を画像に変更する"><a name="『new』を画像に変更する" href="#『new』を画像に変更する"></a>『New』を画像に変更する</h1><hr class="page"><h3 id="1.【new.gif】というファイル名にて、newの画像ファイルを作成します。"><a name="1.【new.gif】というファイル名にて、newの画像ファイルを作成します。" href="#1.【new.gif】というファイル名にて、newの画像ファイルを作成します。"></a>1.【new.gif】というファイル名にて、newの画像ファイルを作成します。</h3><p>今回は30px14pxで作成してみましょう。<br>※お好きなペイントソフトやスクリーンショットで画像を生成してみましょう。</p><h3 id="2.imageフォルダに画像を追加"><a name="2.imageフォルダに画像を追加" href="#2.imageフォルダに画像を追加"></a>2.imageフォルダに画像を追加</h3><p>【/app/assets/images】 に先ほど作った【new.gif】 を追加しましょう。</p><h3 id="3.【_feed_item.html.erb】のnew表示を画像に変更する"><a name="3.【_feed_item.html.erb】のnew表示を画像に変更する" href="#3.【_feed_item.html.erb】のnew表示を画像に変更する"></a>3.【_feed_item.html.erb】のnew表示を画像に変更する</h3><p>【app/views/shared/_feed_item.html.erb】 のnew表示部分を変更します。</p><pre><code class="ruby hljs" data-origin="&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;&amp;lt;%# 経過時間がNEWを出す日数以下ならNEWを表示 %&amp;gt;
+&amp;lt;% if pt &amp;lt; newd then %&amp;gt;
+&amp;lt;%= link_to image_tag('new.gif', :size =&amp;gt; '30x14'), '/' %&amp;gt;
+&amp;lt;% end %&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;">&lt;%<span class="hljs-comment"># 経過時間がNEWを出す日数以下ならNEWを表示 %&gt;</span>
+&lt;% <span class="hljs-keyword">if</span> pt &lt; newd <span class="hljs-keyword">then</span> %&gt;
+&lt;%= link_to image_tag(<span class="hljs-string">'new.gif'</span>, <span class="hljs-symbol">:size</span> =&gt; <span class="hljs-string">'30x14'</span>), <span class="hljs-string">'/'</span> %&gt;
+&lt;% <span class="hljs-keyword">end</span> %&gt;
+</code></pre><p>※image_tag()は(‘画像ファイル名’, :size =&gt; ‘画像の横×縦’)になります。</p><p><%= image_tag"3_1_002.png", :alt => "newサンプル" %></p>
+  </div>
