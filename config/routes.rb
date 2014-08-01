@@ -136,6 +136,8 @@ SamuraiApp::Application.routes.draw do
   get "chapter5_section1/manual1"
   get "chapter5_section1/manual2"
 
+  get 'application/downloadpdf/download'=> 'application#downloadpdf'
+
 
 
   root  'static_pages#home'
