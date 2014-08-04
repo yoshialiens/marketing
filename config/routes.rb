@@ -73,7 +73,34 @@ SamuraiApp::Application.routes.draw do
   get "chapter2_section3/manual1"
   get "chapter2_section3/manual2"
   get "chapter2_section3/manual3"
+  get "chapter2_section3/manual4"
+  get "chapter2_section3/manual5"
+  get "chapter2_section3/manual6"
+  get "chapter2_section3/manual7"
 
+  get "chapter2_section4/manual1"
+  get "chapter2_section4/manual2"
+
+  get "chapter2_section5/manual1"
+  get "chapter2_section5/manual2"
+
+  get "chapter2_section6/manual1"
+  get "chapter2_section6/manual2"
+
+  get "chapter2_section7/manual1"
+  get "chapter2_section7/manual2"
+
+  get "chapter2_section8/manual1"
+  get "chapter2_section8/manual2"
+
+  get "chapter2_section9/manual1"
+  get "chapter2_section9/manual2"
+
+  get "chapter2_section10/manual1"
+  get "chapter2_section10/manual2"
+
+  get "chapter2_section11/manual1"
+  get "chapter2_section11/manual2"
 
 #chapter3
 
@@ -137,6 +164,7 @@ SamuraiApp::Application.routes.draw do
   get "chapter5_section1/manual2"
 
   get 'application/downloadpdf/download'=> 'application#downloadpdf'
+  get 'application/downloadpdf01/download'=> 'application#downloadpdf01'
 
 
 
