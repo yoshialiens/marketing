@@ -1,4 +1,4 @@
-class Chapter1Section3Controller < ApplicationController
+class Chapter2Section6Controller < ApplicationController
   def manual1
   end
 
@@ -11,11 +11,9 @@ class Chapter1Section3Controller < ApplicationController
   def manual4
   end
 
-  before_filter :auth
-  private
-  def auth
+  def manual5
     authenticate_or_request_with_http_basic do |user,pass|
-      user == '1234' && pass == '1234'
+      user == '1111' && pass == '1111'
     end
   end
 end
