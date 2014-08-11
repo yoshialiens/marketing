@@ -49,6 +49,7 @@ SamuraiApp::Application.routes.draw do
   get "chapter2_section3/manual5"
   get "chapter2_section3/manual6"
   get "chapter2_section3/manual7"
+  get "chapter2_section3/manual8"
 
   get "chapter2_section4/manual1"
   get "chapter2_section4/manual2"
