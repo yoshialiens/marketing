@@ -12,6 +12,9 @@ class Chapter2Section6Controller < ApplicationController
   end
 
   def manual5
+  end
+
+  def manual6
     authenticate_or_request_with_http_basic do |user,pass|
       user == '1111' && pass == '1111'
     end
