@@ -149,6 +149,12 @@ SamuraiApp::Application.routes.draw do
 
   get "chapter5_section1/manual1"
   get "chapter5_section1/manual2"
+  get "chapter5_section2/manual1"
+  get "chapter5_section2/manual2"
+  get "chapter5_section2/manual3"
+  get "chapter5_section2/manual4"
+  get "chapter5_section2/manual5"
+  get "chapter5_section2/manual6"
 
   get 'application/downloadpdf/download'=> 'application#downloadpdf'
   get 'application/downloadpdf01/download'=> 'application#downloadpdf01'
