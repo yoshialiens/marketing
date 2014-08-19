@@ -13,4 +13,7 @@ class Chapter4Section1Controller < ApplicationController
 
   def manual5
   end
+
+  def manual6
+  end
 end
